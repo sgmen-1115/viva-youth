@@ -416,6 +416,28 @@ body {
   color: #b42318;
   font-size: 0.82rem;
 }
+
+#app-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%) translateY(12px);
+  background: rgba(20, 38, 88, 0.94);
+  color: #ffffff;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 5000;
+}
+
+#app-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
 .notice-board {
   margin-top: 12px;
 }
@@ -616,12 +638,14 @@ font-size: 0.8rem;
   </div>
 </div>
 
+<div id="app-toast" aria-live="polite" aria-atomic="true"></div>
+
  <div id="home" class="tab-content active">
   <div class="page-visual">
     <div class="hero-container">
       <div class="hero-content">
-        <div style="font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 8px; font-weight: bold;">
-          葛飾ユース
+        <div id="hero-user-welcome" style="font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 8px; font-weight: bold;">
+          ようこそ！
         </div>
         <h2 class="hero-title">
           <span style="color:#ffffff;">ビバ！葛飾！</span>
@@ -630,7 +654,6 @@ font-size: 0.8rem;
     </div>
 
     <div style="padding: 20px; max-width:800px; margin: 0 auto;">
-      <div id="welcome-message" style="text-align:center; color:#f5f9ff; font-weight:700; margin: 0 0 10px; letter-spacing:0.03em;"></div>
       <div class="card" style="margin-top: -12px; text-align: center;">
         <span style="font-size: 0.8rem; color: rgba(255,255,255,0.75);">葛飾ユースアクションフェスまで</span>
         <div id="timer" style="font-size: 1.8rem; font-weight: bold; color: var(--white);">計算中...</div>
@@ -715,6 +738,18 @@ let currentUsername = localStorage.getItem("sokaUsername") || "";
 let userRef = null;
 let isAuthReady = false;
 let isUserListenerBound = false;
+let toastTimer = null;
+
+function showAppToast(message, durationMs = 1800) {
+  const el = document.getElementById("app-toast");
+  if (!el) return;
+  el.textContent = message || "";
+  el.classList.add("show");
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    el.classList.remove("show");
+  }, durationMs);
+}
 
 function usernameClaimKey(name) {
   return encodeURIComponent((name || "").trim().toLowerCase());
@@ -812,8 +847,8 @@ function bindUserDataListener() {
  onValue(userRef, (snapshot) => {
   const data = snapshot.val() || { total: 0, totalMs: 0 };
   const displayName = data.username || currentUsername || "匿名";
-  const welcomeEl = document.getElementById("welcome-message");
-  if (welcomeEl) welcomeEl.innerText = displayName + "さんようこそ！";
+  const heroWelcomeEl = document.getElementById("hero-user-welcome");
+  if (heroWelcomeEl) heroWelcomeEl.innerText = displayName + "さんようこそ！";
   document.getElementById("user-display-name").innerText = "利用者: " + displayName;
     document.getElementById("total-count").innerText =
       (data.total || 0).toLocaleString() + " 遍";
@@ -907,7 +942,7 @@ const CHANT_MS_PER_COUNT = 1200;
                 totalMs: (data.totalMs || 0) + elapsedTime
             });
 
-        alert("保存しました");
+          showAppToast("保存しました");
             resetTimer(); // 保存後にタイマーをリセット
         } catch (error) {
             console.error("保存エラー:", error);
