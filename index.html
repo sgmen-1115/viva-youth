@@ -149,7 +149,7 @@ body {
     gap: 6px;
     border-radius: 0;
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: stretch;
     overflow: hidden; /* ← 横スクロール禁止 */
     height: auto;
@@ -579,9 +579,7 @@ font-size: 0.8rem;
 
 <div class="tab-menu">
   <button class="tab-link active" onclick="openTab(event, 'home')">ホーム</button>
-  <button class="tab-link" onclick="openTab(event, 'everyone')">みんなの挑戦</button>
   <button class="tab-link" onclick="openTab(event, 'mine')">私の挑戦</button>
-  <button class="tab-link" onclick="openTab(event, 'study')">学習</button>
 </div>
 
 <div id="settings-modal">
@@ -589,25 +587,6 @@ font-size: 0.8rem;
         <h3>プロフィール設定</h3>
         <p style="font-size:0.75rem; color:#666;">ユーザー名はPC/スマホ同期用です。重複はできません。</p>
         <input type="text" id="input-username" placeholder="ユーザー名を入力">
-        <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
-        <select id="select-houmen" onchange="updateSoukuList()">
-            <option value="">方面を選択してください</option>
-            <option value="tokyo">東京</option>
-            <option value="dai2tokyo">第二総東京</option>
-            <option value="toukaidou">東海道</option>
-            <option value="kantou">関東</option>
-            <option value="kansai">関西</option>
-            <option value="hokkaido">北海道</option>
-            <option value="touhoku">東北</option>
-            <option value="chuubu">中部</option>
-            <option value="shinetsu">信越</option>
-            <option value="hokuriku">北陸</option>
-            <option value="chuugoku">中国</option>
-            <option value="shikoku">四国</option>
-            <option value="kyushu">九州</option>
-            <option value="okinawa">沖縄</option>
-        </select>
-        <select id="select-souku"><option value="">先に方面を選択してください</option></select>
         <button id="save-settings-btn" class="oumi-btn" style="margin-top:15px;">設定を保存</button>
         <p onclick="toggleSettings()" style="margin-top:15px; font-size:0.8rem; color:#999; cursor:pointer;">キャンセル</p>
     </div>
@@ -649,23 +628,6 @@ font-size: 0.8rem;
   </div>
 </div>
 
-<div id="everyone" class="tab-content">
-    <div class="sub-title">地域の取り組み</div>
-    <div id="action-default" class="card" style="text-align: center; border: 1px dashed #ccc;">
-        <p style="color: #888;">⚙️設定から地域を選択すると<br>地域の指標が表示されます。</p>
-    </div>
-    <div id="action-tokyo-新宿総区" class="area-content card">
-        <h3 style="color: var(--primary-color); margin-top:0;">新宿総区の指標</h3>
-        <p>1. 伝統の新宿！勝利の対話拡大</p>
-        <p>2. 一人ひとりの部員への訪問激励</p>
-    </div>
-    <div id="action-dai2tokyo-八王子総区" class="area-content card">
-        <h3 style="color: var(--primary-color); margin-top:0;">八王子総区の指標</h3>
-        <p>1. 新時代の対話拡大の先駆</p>
-        <p>2. 大学校生の成長を全力応援</p>
-    </div>
-</div>
-
 <div id="mine" class="tab-content">
 
 <div class="sub-title">目標設定</div>
@@ -705,15 +667,6 @@ font-size: 0.8rem;
         <button id="saveBtn" class="oumi-btn" onclick="saveData()" style="display: none; background-color: #f39c12; margin-top:10px;">記録を保存</button>
 
         <button id="resetBtn" onclick="resetTimer()" style="margin-top: 15px; background: none; border: none; color: #999; text-decoration: underline; font-size: 0.8rem; cursor: pointer;">タイマーをリセット</button>
-    </div>
-</div>
-
-<div id="study" class="tab-content">
-    <div class="sub-title">学習資料</div>
-    <div class="card" onclick="window.open('https://drive.google.com/file/d/1NJCwgHrD-JLD7l80Odaik3RbFV5uXNcm/view', '_blank')" style="cursor:pointer; display: flex; align-items: center; padding: 15px;">
-        <div style="background: #ffebee; color: #c62828; width: 45px; height: 45px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 15px;">PDF</div>
-        <div style="flex-grow: 1;"><strong>創価の源流 大東京（上）</strong></div>
-        <div style="color: #ccc;">❯</div>
     </div>
 </div>
 
@@ -777,7 +730,6 @@ isUserListenerBound = true;
 // 設定保存（UID配下に保存）
 document.getElementById("save-settings-btn").onclick = async () => {
   const inputName = document.getElementById("input-username").value.trim();
-  const selectedArea = document.getElementById("select-souku").value;
 
   if (!inputName) {
     alert("ユーザー名を入力してください");
@@ -790,11 +742,9 @@ document.getElementById("save-settings-btn").onclick = async () => {
 
   currentUsername = inputName;
   localStorage.setItem("sokaUsername", inputName);
-  localStorage.setItem("userArea", selectedArea);
 
   await update(userRef, {
     username: inputName,
-    area: selectedArea,
     updatedAt: Date.now()
   });
 
@@ -919,41 +869,12 @@ if (noticeList) {
 </script>
 
 <script>
-    const soukuData = {
-        'tokyo': ['新宿総区', '港総区', '千代田区', '文京区', '台東区', '中央区', '大田総区', '品川総区', '世田谷総区', '目黒総区', '杉並総区', '中野総区', '渋谷総区', '練馬総区', '豊島総区', '北総区', '板橋総区', '足立総区', '江東総区', '墨田総区', '荒川総区', '江戸川総区', '葛飾総区'],
-        'dai2tokyo': ['武蔵野総区', '小金井総区', '新立川総区', '八王子総区', '秋川総区', '青梅総区', '学園総区', '村山総区', '町田総区', '多摩池田総区', '府中総区', '調布総区'],
-        'toukaidou': ['神奈川', '静岡'], 'kantou': ['千葉', '埼玉', '茨城', '群馬', '栃木'], 'kansai': ['大阪', '兵庫', '京都', '滋賀', '奈良', '和歌山'],
-        'hokkaido': ['札幌', '旭川', '函館', '釧路'], 'touhoku': ['宮城', '岩手', '青森', '秋田', '山形', '福島'], 'chuubu': ['愛知', '三重', '岐阜'],
-        'shinetsu': ['長野', '新潟'], 'hokuriku': ['石川', '富山', '福井'], 'chuugoku': ['広島', '岡山', '山口', '鳥取', '島根'],
-        'shikoku': ['香川', '徳島', '愛媛', '高知'], 'kyushu': ['福岡', '佐賀', '長崎', '熊本', '大分', '宮崎', '鹿児島'], 'okinawa': ['沖縄本島', '先島']
-    };
-
     function toggleSettings() {
         const modal = document.getElementById('settings-modal');
         modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
         const sn = localStorage.getItem('sokaUsername');
         if(sn) document.getElementById('input-username').value = sn;
     }
-
-    function updateSoukuList() {
-        const h = document.getElementById('select-houmen').value;
-        const s = document.getElementById('select-souku');
-        s.innerHTML = '<option value="">総区を選択してください</option>';
-        if (soukuData[h]) {
-            soukuData[h].forEach(n => {
-                const o = document.createElement('option');
-                o.value = h + '-' + n; o.innerText = n; s.appendChild(o);
-            });
-        }
-    }
-
-    function applyAreaSettings(key) {
-        document.querySelectorAll('.area-content').forEach(el => el.style.display = 'none');
-        const ac = document.getElementById('action-' + key); if(ac) ac.style.display = 'block';
-      const actionDefault = document.getElementById('action-default');
-      if (actionDefault) actionDefault.style.display = ac ? 'none' : 'block';
-    }
-
 
    function openTab(evt, tabId) {
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -965,9 +886,6 @@ if (noticeList) {
 }
 
 window.onload = () => {
-    const a = localStorage.getItem('userArea');
-    if (a) applyAreaSettings(a);
-
     setInterval(() => {
         const now = new Date();
         const target = new Date(now.getFullYear(), 6, 11);
