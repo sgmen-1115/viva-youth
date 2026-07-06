@@ -5,25 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>葛飾総区ユースアクションフェスサイト</title>
 
-<meta name="description" content="日頃の活動をサポートする公式ページです。">
+<meta name="description" content="葛飾ユースの挑戦をサポートするページです。">
 <meta property="og:type" content="website">
-<meta property="og:title" content="創価学会男子部公式サイト">
-<meta property="og:description" content="日頃の活動をサポートする公式ページです。">
+<meta property="og:title" content="葛飾ユースアクションフェス">
+<meta property="og:description" content="葛飾ユースの挑戦をサポートするページです。">
 <meta property="og:url" content="https://sgmen-1115.github.io/viva-youth/">
 <meta property="og:image" content="https://sgmen-1115.github.io/viva-youth/icon512.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="創価学会男子部公式サイト">
-<meta name="twitter:description" content="日頃の活動をサポートする公式ページです。">
+<meta name="twitter:title" content="葛飾ユースアクションフェス">
+<meta name="twitter:description" content="葛飾ユースの挑戦をサポートする公式ページです。">
 <meta name="twitter:image" content="https://sgmen-1115.github.io/viva-youth/icon512.jpg">
 
 <link rel="manifest" href="./manifest.json">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="男子部アプリ">
+    <meta name="apple-mobile-web-app-title" content="葛飾ユースアクションフェス">
     <link rel="apple-touch-icon" href="./icon192.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -200,6 +200,16 @@ body {
 .tab-content:not(#home) > * {
   position: relative;
   z-index: 1;
+}
+
+/* 私の挑戦はPCで横幅を抑えて読みやすくする */
+@media (min-width: 1024px) {
+  #mine > .sub-title,
+  #mine > .card {
+    width: min(860px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* ヒーロー背景（画像ベース） */
@@ -573,7 +583,7 @@ font-size: 0.8rem;
 <body>
 
 <div class="fixed-header">
-   <h1>SOKA Men's Division Official</h1>
+  <h1>葛飾総区ユースアクションフェス</h1>
     <div class="settings-btn" onclick="toggleSettings()">⚙️</div>
 </div>
 
@@ -598,18 +608,17 @@ font-size: 0.8rem;
     <div class="hero-container">
       <div class="hero-content">
         <div style="font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 8px; font-weight: bold;">
-          MEN'S DIVISION
+          葛飾ユース
         </div>
         <h2 class="hero-title">
-          僕が見ている景色は、<br>
-          <span style="color:#ffffff;">僕の心で変えられる。</span>
+          <span style="color:#ffffff;">ビバ！葛飾！</span>
         </h2>
       </div>
     </div>
 
     <div style="padding: 20px; max-width:800px; margin: 0 auto;">
       <div class="card" style="margin-top: -12px; text-align: center;">
-        <span style="font-size: 0.8rem; color: rgba(255,255,255,0.75);">7.11 男子部結成記念日まで</span>
+        <span style="font-size: 0.8rem; color: rgba(255,255,255,0.75);">葛飾ユースアクションフェスまで</span>
         <div id="timer" style="font-size: 1.8rem; font-weight: bold; color: var(--white);">計算中...</div>
       </div>
 
@@ -888,9 +897,9 @@ if (noticeList) {
 window.onload = () => {
     setInterval(() => {
         const now = new Date();
-        const target = new Date(now.getFullYear(), 6, 11);
+    const target = new Date(now.getFullYear(), 10, 8);
         let diff = target - now;
-        if (diff < 0) diff = new Date(now.getFullYear() + 1, 6, 11) - now;
+    if (diff < 0) diff = new Date(now.getFullYear() + 1, 10, 8) - now;
         const d = Math.floor(diff / (1000*60*60*24));
         const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
         const m = Math.floor((diff % (1000*60*60)) / (1000*60));
