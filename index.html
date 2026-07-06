@@ -366,6 +366,56 @@ body {
   box-sizing: border-box;
   margin-bottom: 10px;
 }
+
+#username-register-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 4000;
+  background: rgba(0, 0, 0, 0.55);
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.username-register-card {
+  width: min(420px, 100%);
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 18px;
+  box-sizing: border-box;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+}
+
+.username-register-title {
+  margin: 0 0 10px;
+  color: #17325f;
+  font-size: 1.05rem;
+}
+
+.username-register-help {
+  margin: 0 0 12px;
+  color: #5f6f95;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.username-register-input {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 10px;
+  border: 1px solid #cfd8ec;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.username-register-error {
+  min-height: 1.2em;
+  margin: 0 0 10px;
+  color: #b42318;
+  font-size: 0.82rem;
+}
 .notice-board {
   margin-top: 12px;
 }
@@ -556,6 +606,16 @@ font-size: 0.8rem;
   <button class="tab-link" onclick="openTab(event, 'mine')">私の挑戦</button>
 </div>
 
+<div id="username-register-modal" aria-hidden="true">
+  <div class="username-register-card">
+    <h3 class="username-register-title">ユーザー名登録</h3>
+    <p id="username-register-help" class="username-register-help">ユーザー名を登録してください（2文字以上）</p>
+    <input id="username-register-input" class="username-register-input" type="text" maxlength="30" placeholder="ユーザー名を入力">
+    <p id="username-register-error" class="username-register-error"></p>
+    <button id="username-register-submit" class="oumi-btn">登録してはじめる</button>
+  </div>
+</div>
+
  <div id="home" class="tab-content active">
   <div class="page-visual">
     <div class="hero-container">
@@ -570,6 +630,7 @@ font-size: 0.8rem;
     </div>
 
     <div style="padding: 20px; max-width:800px; margin: 0 auto;">
+      <div id="welcome-message" style="text-align:center; color:#f5f9ff; font-weight:700; margin: 0 0 10px; letter-spacing:0.03em;"></div>
       <div class="card" style="margin-top: -12px; text-align: center;">
         <span style="font-size: 0.8rem; color: rgba(255,255,255,0.75);">葛飾ユースアクションフェスまで</span>
         <div id="timer" style="font-size: 1.8rem; font-weight: bold; color: var(--white);">計算中...</div>
@@ -659,23 +720,62 @@ function usernameClaimKey(name) {
   return encodeURIComponent((name || "").trim().toLowerCase());
 }
 
+function askUsernameWithModal(defaultValue, helpText, errorText) {
+  return new Promise((resolve) => {
+    const modal = document.getElementById("username-register-modal");
+    const input = document.getElementById("username-register-input");
+    const submit = document.getElementById("username-register-submit");
+    const help = document.getElementById("username-register-help");
+    const error = document.getElementById("username-register-error");
+
+    help.textContent = helpText || "ユーザー名を登録してください（2文字以上）";
+    error.textContent = errorText || "";
+    input.value = defaultValue || "";
+    modal.style.display = "flex";
+    modal.setAttribute("aria-hidden", "false");
+
+    const finish = () => {
+      const value = (input.value || "").trim();
+      submit.onclick = null;
+      input.onkeydown = null;
+      modal.style.display = "none";
+      modal.setAttribute("aria-hidden", "true");
+      resolve(value);
+    };
+
+    submit.onclick = finish;
+    input.onkeydown = (ev) => {
+      if (ev.key === "Enter") {
+        ev.preventDefault();
+        finish();
+      }
+    };
+
+    setTimeout(() => input.focus(), 0);
+  });
+}
+
 async function ensureUsernameRegistration(uid) {
+  let helpText = "ユーザー名を登録してください（2文字以上）";
+  let errorText = "";
+
   while (true) {
     const saved = (localStorage.getItem("sokaUsername") || "").trim();
     let candidate = saved;
 
     if (!candidate) {
-      const input = window.prompt("ユーザー名を登録してください（2文字以上）", "");
-      candidate = (input || "").trim();
+      candidate = await askUsernameWithModal("", helpText, errorText);
     }
 
     if (!candidate) {
-      alert("ユーザー名の登録が必要です。");
+      helpText = "ユーザー名を登録してください（2文字以上）";
+      errorText = "ユーザー名は必須です。";
       continue;
     }
     if (candidate.length < 2) {
       localStorage.removeItem("sokaUsername");
-      alert("ユーザー名は2文字以上で入力してください。");
+      helpText = "ユーザー名を登録してください（2文字以上）";
+      errorText = "ユーザー名は2文字以上で入力してください。";
       continue;
     }
 
@@ -688,7 +788,8 @@ async function ensureUsernameRegistration(uid) {
 
     if (!tx.committed) {
       localStorage.removeItem("sokaUsername");
-      alert("そのユーザー名はすでに使用されています。別のユーザー名を入力してください。");
+      helpText = "別のユーザー名を入力してください。";
+      errorText = "そのユーザー名はすでに使用されています。";
       continue;
     }
 
@@ -698,6 +799,9 @@ async function ensureUsernameRegistration(uid) {
       usernameKey: key,
       updatedAt: Date.now()
     });
+
+    helpText = "ユーザー名を登録してください（2文字以上）";
+    errorText = "";
     return candidate;
   }
 }
@@ -708,6 +812,8 @@ function bindUserDataListener() {
  onValue(userRef, (snapshot) => {
   const data = snapshot.val() || { total: 0, totalMs: 0 };
   const displayName = data.username || currentUsername || "匿名";
+  const welcomeEl = document.getElementById("welcome-message");
+  if (welcomeEl) welcomeEl.innerText = displayName + "さんようこそ！";
   document.getElementById("user-display-name").innerText = "利用者: " + displayName;
     document.getElementById("total-count").innerText =
       (data.total || 0).toLocaleString() + " 遍";
@@ -743,6 +849,7 @@ if (typeof window.refreshGoalView === "function") {
 });
 
     // --- 唱題カウンター ---
+const CHANT_MS_PER_COUNT = 1200;
 
 // --- 唱題タイマーロジック ---
     let startTime, timerInterval, elapsedTime = 0, isRunning = false;
@@ -762,14 +869,14 @@ if (typeof window.refreshGoalView === "function") {
                 const mm = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
                 const ss = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
                 display.innerText = `${hh}:${mm}:${ss}`;
-                document.getElementById('session-count').innerText = `${Math.floor(diff / 1500)} 遍`;
+                document.getElementById('session-count').innerText = `${Math.floor(diff / CHANT_MS_PER_COUNT)} 遍`;
             }, 100);
             saveBtn.style.display = "none";
         } else {
             isRunning = false; startBtn.innerText = "再開";
             clearInterval(timerInterval);
             elapsedTime += Date.now() - startTime;
-            if (elapsedTime >= 1500) saveBtn.style.display = "block"; // 1500ms(1遍)以上で保存可能
+              if (elapsedTime >= CHANT_MS_PER_COUNT) saveBtn.style.display = "block";
         }
     };
 
@@ -791,7 +898,7 @@ if (typeof window.refreshGoalView === "function") {
         if (!userRef) return;
 
         try {
-            const sessionCount = Math.floor(elapsedTime / 1500);
+        const sessionCount = Math.floor(elapsedTime / CHANT_MS_PER_COUNT);
             const snapshot = await get(userRef);
             const data = snapshot.val() || { total: 0, totalMs: 0 };
 
@@ -800,7 +907,7 @@ if (typeof window.refreshGoalView === "function") {
                 totalMs: (data.totalMs || 0) + elapsedTime
             });
 
-            alert("記録を保存しました！");
+        alert("保存しました");
             resetTimer(); // 保存後にタイマーをリセット
         } catch (error) {
             console.error("保存エラー:", error);
@@ -812,6 +919,18 @@ if (typeof window.refreshGoalView === "function") {
     // ===== お知らせ機能 =====
 const noticeRef = ref(db, "noticeBoard");
 const noticeList = document.getElementById("notice-list");
+const fixedNotices = [
+  {
+    author: "運営",
+    text: "9/13 第1回ユースの集い（青年幹視聴）",
+    createdAt: new Date("2026-09-13T09:00:00+09:00").getTime(),
+  },
+  {
+    author: "運営",
+    text: "10/18 第2回ユースの集い",
+    createdAt: new Date("2026-10-18T09:00:00+09:00").getTime(),
+  },
+];
 
 function formatNoticeTime(ts) {
   const d = new Date(ts || Date.now());
@@ -828,6 +947,7 @@ if (noticeList) {
   onValue(q, (snapshot) => {
     const items = [];
     snapshot.forEach((child) => items.push(child.val()));
+    items.push(...fixedNotices);
     items.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
 
     noticeList.innerHTML = "";
