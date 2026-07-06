@@ -1,11 +1,1523 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>My Site</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>男子部公式サイト</title>
+
+<meta name="description" content="日頃の活動をサポートする公式ページです。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="創価学会男子部公式サイト">
+<meta property="og:description" content="日頃の活動をサポートする公式ページです。">
+<meta property="og:url" content="https://sgmen-1115.github.io/">
+<meta property="og:image" content="https://sgmen-1115.github.io/ogp.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="創価学会男子部公式サイト">
+<meta name="twitter:description" content="日頃の活動をサポートする公式ページです。">
+<meta name="twitter:image" content="https://sgmen-1115.github.io/ogp.jpg">
+
+<link rel="manifest" href="/manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="男子部アプリ">
+    <link rel="apple-touch-icon" href="icon-192★.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary-color: #003366;
+  --accent-color: #f39c12;
+  --white: #ffffff;
+  --header-h: 56px;
+  --tab-h: 64px;
+  --ui-glass: rgba(236, 241, 252, 0.92);
+  --text-blue: #17325f;
+
+  /* 背景画像のパス（ここだけ後で変更しやすいよう変数化） */
+  --hero-image: url("title_pic.jpg");
+}
+
+body {
+  margin: 0;
+  padding-top: var(--header-h);
+  color: var(--text-blue);
+  font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
+  background: linear-gradient(180deg, #7ca2ef 0%, #4f78cc 48%, #2d4ea1 100%);
+  background-attachment: fixed;
+}
+
+/* 固定ヘッダー */
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-h);
+  box-sizing: border-box;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background: rgba(25, 42, 92, 0.22);
+  backdrop-filter: blur(8px);
+  border-bottom: none;
+  box-shadow: none;
+}
+
+.fixed-header h1 {
+  margin: 0;
+  font-family: "Cinzel", serif;
+  font-size: clamp(0.76rem, 1.7vw, 0.95rem); /* 大きすぎ防止 */
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  line-height: 1;
+  color: rgba(245, 249, 255, 0.95);
+  text-transform: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.settings-btn {
+  color: #2f3f75;
+  cursor: pointer;
+}
+
+/* スマホでさらに少しだけコンパクト */
+@media (max-width: 768px) {
+  .fixed-header {
+    padding: 0 12px;
+  }
+  .fixed-header h1 {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+}    
+
+/* タブ */
+.tab-menu {
+  position: sticky;
+  top: var(--header-h);
+  z-index: 2500;
+  height: var(--tab-h);
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: min(1440px, calc(100% - 24px));
+  background: rgba(25, 42, 92, 0.22);
+  backdrop-filter: blur(8px);
+  border-radius: 0 0 22px 22px;
+}
+
+.tab-menu .tab-link,
+.tab-menu .tab-btn {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(245, 249, 255, 0.9);
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.1;
+  padding: 8px 10px;
+}
+
+/* アクティブ */
+.tab-menu .tab-link.active,
+.tab-menu .tab-btn.active {
+  background: rgba(255, 255, 255, 0.24);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.42);
+}
+
+/* スマホ：5つを1画面に収める */
+@media (max-width: 768px) {
+  .tab-menu {
+    width: 100%;
+    padding: 8px 8px;
+    gap: 6px;
+    border-radius: 0;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    align-items: stretch;
+    overflow: hidden; /* ← 横スクロール禁止 */
+    height: auto;
+  }
+
+  .tab-menu .tab-link,
+  .tab-menu .tab-btn {
+    width: 100%;
+    min-width: 0;
+    min-height: 40px;
+    font-size: 12px;
+    padding: 7px 4px;
+    white-space: normal;
+    word-break: keep-all;
+    text-align: center;
+  }
+}
+
+/* コンテンツ */
+.tab-content {
+  display: none;
+  position: relative;
+  padding: 20px 16px 40px;
+  color: var(--text-blue);
+  background: transparent;
+  min-height: calc(100vh - (var(--header-h) + var(--tab-h)));
+}
+.tab-content.active {
+  display: block;
+}
+.tab-content:not(#home)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 14%, rgba(255,255,255,0.18), rgba(255,255,255,0) 30%),
+    radial-gradient(circle at 84% 12%, rgba(255,255,255,0.10), rgba(255,255,255,0) 26%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,0.06) 0,
+      rgba(255,255,255,0.06) 1px,
+      transparent 1px,
+      transparent 26px
+    );
+  opacity: 0.55;
+  pointer-events: none;
+}
+.tab-content:not(#home) > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ヒーロー背景（画像ベース） */
+.page-visual {
+  position: relative;
+  min-height: calc(100vh - (var(--header-h) + var(--tab-h)));
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(25,59,143,0.20) 0%, rgba(25,59,143,0.55) 100%),
+    var(--hero-image) center bottom / cover no-repeat;
+}
+.page-visual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 16% 20%, rgba(255,255,255,0.22), transparent 25%),
+    radial-gradient(circle at 84% 16%, rgba(210,230,255,0.16), transparent 24%);
+  pointer-events: none;
+}
+
+/* ヒーローテキスト */
+.hero-container {
+  position: relative;
+  min-height: 58vh;
+}
+.hero-content {
+  position: absolute;
+  top: 26px;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  padding: 0 20px;
+  max-width: 980px;
+  margin: 0 auto;
+}
+.hero-title {
+  margin: 0;
+  font-size: clamp(1.8rem, 3.7vw, 3rem);
+  line-height: 1.35;
+  letter-spacing: 0.03em;
+  color: #f5f9ff;
+  font-weight: 500;
+  text-shadow: 0 2px 10px rgba(5,20,60,0.35), 0 0 28px rgba(186,214,255,0.28);
+}
+.hero-title::after {
+  content: "";
+  display: block;
+  width: clamp(120px, 20vw, 220px);
+  height: 2px;
+  margin-top: 16px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.85), rgba(255,255,255,0.08));
+  border-radius: 999px;
+}
+.hero-content > div:first-child {
+  color: #dbe9ff !important;
+  letter-spacing: 0.22em !important;
+  font-weight: 700 !important;
+  opacity: 0.92;
+}
+
+/* 旧イラスト要素は完全停止 */
+.hero-illustration,
+.city-silhouette,
+.hero-horizon,
+.hero-city-back,
+.hero-city-front,
+.hero-light-trail {
+  display: none !important;
+}
+
+/* カード */
+.card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  margin-bottom: 20px;
+  color: #17325f;
+}
+.card p,
+.card strong,
+.card div {
+  color: inherit;
+}
+
+/* ホーム内カード（可読性重視で暗めに） */
+#home .card {
+  background: linear-gradient(180deg, rgba(27,57,128,0.58), rgba(18,41,98,0.52)) !important;
+  border: 1px solid rgba(190,215,255,0.28) !important;
+  box-shadow: 0 10px 30px rgba(9,26,71,0.28) !important;
+  color: #fff !important;
+  margin-top: -12px !important;
+  position: relative;
+  z-index: 8;
+}
+#home .card p,
+#home .card strong,
+#home .card div,
+#home .notice-meta,
+#home .notice-text,
+#home .notice-empty {
+  color: #fff !important;
+}
+#home .notice-item {
+  background: rgba(255, 255, 255, 0.10) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+}
+
+/* サブUI */
+.sub-title {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 6px 20px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin: 15px 0 10px 0;
+}
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  margin: 20px 0;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.oumi-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 15px;
+  border-radius: 50px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+.goal-textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  font-family: inherit;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+#settings-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 3000;
+  align-items: center;
+  justify-content: center;
+}
+.modal-content {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  width: 85%;
+  max-width: 400px;
+  text-align: center;
+}
+.modal-content input,
+.modal-content select {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+}
+.area-content {
+  display: none;
+}
+.notice-board {
+  margin-top: 12px;
+}
+.notice-list {
+  display: grid;
+  gap: 8px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+.notice-item {
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.notice-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  margin-bottom: 4px;
+}
+.notice-text {
+  line-height: 1.45;
+  word-break: break-word;
+}
+.notice-empty {
+  margin: 0;
+}
+.goal-date-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.goal-date-input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #d7dbe8;
+  font-family: inherit;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+}
+
+.goal-save-date-btn,
+.goal-add-btn {
+  width: auto;
+  min-width: 110px;
+  padding: 10px 14px;
+}
+
+.goal-date-countdown {
+  margin: 10px 0 0;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #2a4178;
+}
+
+.goal-add-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.goal-items-container {
+  margin-top: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.goal-item-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(240, 247, 255, 0.8);
+  border: 1px solid #d8e6ff;
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.goal-item-checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.goal-item-text {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid #d7dbe8;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.goal-item-text.done {
+  text-decoration: line-through;
+  opacity: 0.65;
+}
+
+.goal-item-delete {
+  border: none;
+  background: transparent;
+  color: #8d9bbf;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .goal-date-row,
+  .goal-add-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .goal-save-date-btn,
+  .goal-add-btn {
+    width: 100%;
+  }
+}
+
+.schedule-form-grid {
+display: grid;
+gap: 8px;
+}
+
+.schedule-form-grid input,
+.schedule-form-grid textarea {
+width: 100%;
+box-sizing: border-box;
+border: 1px solid #d7dbe8;
+border-radius: 10px;
+padding: 10px 12px;
+font-family: inherit;
+font-size: 0.95rem;
+}
+
+.schedule-form-grid textarea {
+min-height: 84px;
+resize: vertical;
+}
+
+.schedule-item {
+border: 1px solid rgba(255,255,255,0.2);
+border-radius: 10px;
+padding: 10px 12px;
+margin-bottom: 8px;
+background: rgba(255,255,255,0.08);
+}
+
+.schedule-item-title {
+font-weight: 700;
+margin-bottom: 4px;
+}
+
+.schedule-item-meta {
+font-size: 0.85rem;
+color: #d9e8ff;
+margin-bottom: 6px;
+}
+
+.schedule-actions {
+display: flex;
+gap: 8px;
+flex-wrap: wrap;
+margin-top: 8px;
+}
+
+.schedule-mini-btn {
+border: 1px solid rgba(255,255,255,0.3);
+border-radius: 8px;
+background: rgba(255,255,255,0.12);
+color: #fff;
+padding: 6px 10px;
+cursor: pointer;
+font-size: 0.8rem;
+}
+</style>
 </head>
 <body>
-  <h1>はじめまして!</h1>
-  <p>GitHub Pagesで作ったサイトです。</p>
+
+<div class="fixed-header">
+   <h1>SOKA Men's Division Official</h1>
+    <div class="settings-btn" onclick="toggleSettings()">⚙️</div>
+</div>
+
+<div class="tab-menu">
+  <button class="tab-link active" onclick="openTab(event, 'home')">ホーム</button>
+  <button class="tab-link" onclick="openTab(event, 'schedule')">予定</button>
+  <button class="tab-link" onclick="openTab(event, 'everyone')">みんなの挑戦</button>
+  <button class="tab-link" onclick="openTab(event, 'mine')">私の挑戦</button>
+  <button class="tab-link" onclick="openTab(event, 'study')">学習</button>
+</div>
+
+<div id="settings-modal">
+    <div class="modal-content">
+        <h3>プロフィール設定</h3>
+        <p style="font-size:0.75rem; color:#666;">ユーザー名はPC/スマホ同期用です。重複はできません。</p>
+        <input type="text" id="input-username" placeholder="ユーザー名を入力">
+        <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
+        <select id="select-houmen" onchange="updateSoukuList()">
+            <option value="">方面を選択してください</option>
+            <option value="tokyo">東京</option>
+            <option value="dai2tokyo">第二総東京</option>
+            <option value="toukaidou">東海道</option>
+            <option value="kantou">関東</option>
+            <option value="kansai">関西</option>
+            <option value="hokkaido">北海道</option>
+            <option value="touhoku">東北</option>
+            <option value="chuubu">中部</option>
+            <option value="shinetsu">信越</option>
+            <option value="hokuriku">北陸</option>
+            <option value="chuugoku">中国</option>
+            <option value="shikoku">四国</option>
+            <option value="kyushu">九州</option>
+            <option value="okinawa">沖縄</option>
+        </select>
+        <select id="select-souku"><option value="">先に方面を選択してください</option></select>
+        <button id="save-settings-btn" class="oumi-btn" style="margin-top:15px;">設定を保存</button>
+        <p onclick="toggleSettings()" style="margin-top:15px; font-size:0.8rem; color:#999; cursor:pointer;">キャンセル</p>
+    </div>
+</div>
+
+
+ <div id="home" class="tab-content active">
+  <div class="page-visual">
+    <div class="hero-container">
+      <div class="hero-content">
+        <div style="font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 8px; font-weight: bold;">
+          MEN'S DIVISION
+        </div>
+        <h2 class="hero-title">
+          僕が見ている景色は、<br>
+          <span style="color:#ffffff;">僕の心で変えられる。</span>
+        </h2>
+      </div>
+    </div>
+
+    <div style="padding: 20px; max-width:800px; margin: 0 auto;">
+      <div class="card" style="margin-top: -12px; text-align: center;">
+        <span style="font-size: 0.8rem; color: rgba(255,255,255,0.75);">7.11 男子部結成記念日まで</span>
+        <div id="timer" style="font-size: 1.8rem; font-weight: bold; color: var(--white);">計算中...</div>
+      </div>
+
+      <div class="card notice-board">
+        <div class="sub-title" style="margin:0 0 10px 0;">お知らせ</div>
+        <div id="notice-list" class="notice-list">
+          <p class="notice-empty">現在お知らせはありません。</p>
+        </div>
+      </div>
+
+      <div class="sub-title">注目動画</div>
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/WORGpCGs3GY?start=483" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="schedule" class="tab-content">
+    <div class="sub-title">活動スケジュール</div>
+    <div class="card">
+        <p style="font-size: 0.8rem; color: #666;">【全方面共通】</p>
+        <div style="padding:10px 0; border-bottom:1px solid #eee;"><strong>5/03</strong> 創価学会の日</div>
+        <div style="padding:10px 0;"><strong>7/11</strong> 男子部結成記念日</div>
+    </div>
+    <div id="sched-default" class="card" style="text-align: center; border: 1px dashed #ccc;">
+        <p style="color: #888;">⚙️設定から地域を選択すると<br>個別の予定が表示されます。</p>
+  <div class="sub-title">活動スケジュール</div>
+
+  <div class="card">
+    <h3 style="margin-top:0;">公開予定</h3>
+    <div id="schedule-public-list">
+      <p style="color:#888;">予定を読み込み中です...</p>
+    </div>
+    <div id="sched-tokyo-新宿総区" class="area-content card">
+        <p style="font-weight:bold; color:var(--primary-color);">【東京・新宿総区の予定】</p>
+        <p>・4/20 男子部座談会</p>
+        <p>・5/12 新宿平和会館記念行事</p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0;">予定を提案する</h3>
+
+    <div class="schedule-form-grid">
+      <input id="sch-title" type="text" placeholder="タイトル">
+      <input id="sch-date" type="date">
+      <input id="sch-start" type="time">
+      <input id="sch-end" type="time">
+      <input id="sch-location" type="text" placeholder="場所（任意）">
+      <textarea id="sch-details" placeholder="詳細（任意）"></textarea>
+    </div>
+    <div id="sched-dai2tokyo-八王子総区" class="area-content card">
+        <p style="font-weight:bold; color:var(--primary-color);">【第二総東京・八王子総区の予定】</p>
+        <p>・4/25 八王子文化会館中継</p>
+
+    <button class="oumi-btn" onclick="submitScheduleProposal()" style="margin-top:10px;">
+      提案を送信
+    </button>
+    <p id="sch-submit-msg" style="font-size:0.85rem; color:#6e7fa8; margin-top:8px;"></p>
+  </div>
+
+  <div id="admin-review-card" class="card" style="display:none;">
+    <h3 style="margin-top:0;">管理者レビュー（承認待ち）</h3>
+    <div id="submission-review-list">
+      <p style="color:#888;">承認待ちはありません。</p>
+    </div>
+  </div>
+</div>
+
+<div id="everyone" class="tab-content">
+    <div class="sub-title">地域の取り組み</div>
+    <div id="action-default" class="card" style="text-align: center; border: 1px dashed #ccc;">
+        <p style="color: #888;">⚙️設定から地域を選択すると<br>地域の指標が表示されます。</p>
+    </div>
+    <div id="action-tokyo-新宿総区" class="area-content card">
+        <h3 style="color: var(--primary-color); margin-top:0;">新宿総区の指標</h3>
+        <p>1. 伝統の新宿！勝利の対話拡大</p>
+        <p>2. 一人ひとりの部員への訪問激励</p>
+    </div>
+    <div id="action-dai2tokyo-八王子総区" class="area-content card">
+        <h3 style="color: var(--primary-color); margin-top:0;">八王子総区の指標</h3>
+        <p>1. 新時代の対話拡大の先駆</p>
+        <p>2. 大学校生の成長を全力応援</p>
+    </div>
+</div>
+
+<div id="mine" class="tab-content">
+
+<div class="sub-title">目標設定</div>
+<div class="card">
+  <label style="font-size: 0.8rem; font-weight: bold; color: #666; display: block; margin-bottom: 8px;">
+    目標日
+  </label>
+  <div class="goal-date-row">
+    <input type="date" id="goal-date-input" class="goal-date-input">
+    <button class="oumi-btn goal-save-date-btn" onclick="saveGoalDate()">目標日を保存</button>
+  </div>
+  <p id="goal-date-countdown" class="goal-date-countdown">※目標日を設定してください</p>
+
+  <label style="font-size: 0.8rem; font-weight: bold; color: #666; display: block; margin: 14px 0 8px;">
+    目標リスト
+  </label>
+  <div class="goal-add-row">
+    <input type="text" id="goal-item-input" class="goal-textarea" placeholder="例：毎日15分唱題する">
+    <button class="oumi-btn goal-add-btn" onclick="addGoalItem()">目標を追加</button>
+  </div>
+
+  <div id="goal-items-container" class="goal-items-container"></div>
+</div>
+
+    <div class="sub-title">唱題カウンター</div>
+    <div class="card" style="text-align: center;">
+        <p id="user-display-name" style="font-size:0.8rem; color:var(--primary-color); font-weight:bold;"></p>
+        <div style="display: flex; justify-content: space-around; margin-bottom: 20px; background: #f0f7ff; padding: 15px; border-radius: 12px;">
+            <div><div style="font-size: 0.7rem;">累計遍数</div><div id="total-count" style="font-weight:bold;">0 遍</div></div>
+            <div><div style="font-size: 0.7rem;">累計時間</div><div id="total-time" style="font-weight:bold;">0:00</div></div>
+        </div>
+        <div id="timer-display" style="font-size: 3rem; font-weight: 300; margin: 10px 0;">00:00:00</div>
+        <div id="session-count" style="font-size: 1rem; color: #79bede; margin-bottom: 20px; font-weight: bold;">0 遍</div>
+
+        <button id="startBtn" class="oumi-btn">スタート</button>
+
+        <button id="saveBtn" class="oumi-btn" onclick="saveData()" style="display: none; background-color: #f39c12; margin-top:10px;">記録を保存</button>
+
+        <button id="resetBtn" onclick="resetTimer()" style="margin-top: 15px; background: none; border: none; color: #999; text-decoration: underline; font-size: 0.8rem; cursor: pointer;">タイマーをリセット</button>
+    </div>
+</div>
+
+<div id="study" class="tab-content">
+    <div class="sub-title">学習資料</div>
+    <div class="card" onclick="window.open('https://drive.google.com/file/d/1NJCwgHrD-JLD7l80Odaik3RbFV5uXNcm/view', '_blank')" style="cursor:pointer; display: flex; align-items: center; padding: 15px;">
+        <div style="background: #ffebee; color: #c62828; width: 45px; height: 45px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 15px;">PDF</div>
+        <div style="flex-grow: 1;"><strong>創価の源流 大東京（上）</strong></div>
+        <div style="color: #ccc;">❯</div>
+    </div>
+</div>
+
+<script type="module">
+　  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+   import { getDatabase, ref, get, update, onValue, push, query, orderByChild, limitToLast } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    import { getDatabase, ref, get, update, onValue, push, query, orderByChild, limitToLast } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCFEUoUyWhz8Qlr2Z261LOlzwe7BIQQTx4",
+        authDomain: "sgmen-db.firebaseapp.com",
+        databaseURL: "https://sgmen-db-default-rtdb.firebaseio.com",
+        projectId: "sgmen-db",
+        storageBucket: "sgmen-db.firebasestorage.app",
+        messagingSenderId: "968577713228",
+        appId: "1:968577713228:web:23eaf381b4be6db1fa60e9"
+    };
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const auth = getAuth(app);
+
+let currentUsername = localStorage.getItem("sokaUsername") || "";
+let userRef = null;
+let isAuthReady = false;
+let isUserListenerBound = false;
+
+function bindUserDataListener() {
+  if (!userRef) return;
+
+ onValue(userRef, (snapshot) => {
+  const data = snapshot.val() || { total: 0, totalMs: 0 };
+  const displayName = data.username || currentUsername || "匿名";
+  document.getElementById("user-display-name").innerText = "利用者: " + displayName;
+    document.getElementById("total-count").innerText =
+      (data.total || 0).toLocaleString() + " 遍";
+    const h = Math.floor((data.totalMs || 0) / 3600000);
+    const m = Math.floor(((data.totalMs || 0) % 3600000) / 60000);
+    document.getElementById("total-time").innerText =
+      h + ":" + m.toString().padStart(2, "0");
+  });
+}
+
+onAuthStateChanged(auth, async (user) => {
+if (!user) {
+try {
+await signInAnonymously(auth);
+} catch (e) {
+console.error("匿名認証エラー:", e);
+alert("認証に失敗しました。Firebase Authentication の匿名認証を有効化してください。");
+}
+return;
+}
+userRef = ref(db, "users/" + user.uid);
+isAuthReady = true;
+if (!isUserListenerBound) {
+bindUserDataListener();
+isUserListenerBound = true;
+}
+});
+
+// 設定保存（UID配下に保存）
+document.getElementById("save-settings-btn").onclick = async () => {
+  const inputName = document.getElementById("input-username").value.trim();
+  const selectedArea = document.getElementById("select-souku").value;
+
+  if (!inputName) {
+    alert("ユーザー名を入力してください");
+    return;
+  }
+  if (!isAuthReady || !userRef) {
+    alert("初期化中です。少し待ってもう一度お試しください。");
+    return;
+  }
+
+  currentUsername = inputName;
+  localStorage.setItem("sokaUsername", inputName);
+  localStorage.setItem("userArea", selectedArea);
+
+  await update(userRef, {
+    username: inputName,
+    area: selectedArea,
+    updatedAt: Date.now()
+  });
+
+  alert("設定を保存しました");
+ window.toggleSettings();
+};
+
+    // --- 唱題カウンター ---
+   
+    // --- 予定 ---
+let currentUid = null;
+let currentAreaKey = "common";
+let adminWatchBound = false;
+let scheduleWatchBound = false;
+let submissionWatchBound = false;
+
+function normalizeAreaKey(raw) {
+  if (!raw) return "common";
+  return raw
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "_")
+    .replace(/[^a-z0-9_\-]/g, "_");
+}
+
+function getAreaKeyFromStorage() {
+  const raw = localStorage.getItem("userArea") || "";
+  return normalizeAreaKey(raw);
+}
+
+function formatDateTime(ms) {
+  const d = new Date(ms || Date.now());
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  const hh = String(d.getHours()).padStart(2, "0");
+  const mm = String(d.getMinutes()).padStart(2, "0");
+  return y + "/" + m + "/" + day + " " + hh + ":" + mm;
+}
+
+function toYmd(dateObj) {
+  const y = dateObj.getFullYear();
+  const m = String(dateObj.getMonth() + 1).padStart(2, "0");
+  const d = String(dateObj.getDate()).padStart(2, "0");
+  return "" + y + m + d;
+}
+
+function toGoogleDateTime(localIsoLike) {
+  const dt = new Date(localIsoLike);
+  return dt.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z");
+}
+
+function buildGoogleCalendarUrl(eventData) {
+  const base = "https://calendar.google.com/calendar/render?action=TEMPLATE";
+  const title = encodeURIComponent(eventData.title || "予定");
+  const details = encodeURIComponent(eventData.details || "");
+  const location = encodeURIComponent(eventData.location || "");
+
+  let dates = "";
+  if (eventData.allDay) {
+    const s = new Date(eventData.startAt);
+    const e = new Date(eventData.endAt || eventData.startAt);
+    e.setDate(e.getDate() + 1);
+    dates = toYmd(s) + "/" + toYmd(e);
+  } else {
+    const start = toGoogleDateTime(new Date(eventData.startAt).toISOString().slice(0,16));
+    const end = toGoogleDateTime(new Date(eventData.endAt).toISOString().slice(0,16));
+    dates = start + "/" + end;
+  }
+
+  return base
+    + "&text=" + title
+    + "&dates=" + encodeURIComponent(dates)
+    + "&details=" + details
+    + "&location=" + location;
+}
+
+function renderPublicSchedules(items) {
+  const root = document.getElementById("schedule-public-list");
+  if (!root) return;
+
+  root.innerHTML = "";
+  if (!items.length) {
+    root.innerHTML = "<p style='color:#888;'>公開予定はまだありません。</p>";
+    return;
+  }
+
+  items.forEach((it) => {
+    const box = document.createElement("div");
+    box.className = "schedule-item";
+
+    const title = document.createElement("div");
+    title.className = "schedule-item-title";
+    title.textContent = it.title || "無題";
+
+    const meta = document.createElement("div");
+    meta.className = "schedule-item-meta";
+    meta.textContent = it.allDay
+      ? formatDateTime(it.startAt).slice(0, 10) + " 終日"
+      : formatDateTime(it.startAt) + " - " + formatDateTime(it.endAt);
+
+    const detail = document.createElement("div");
+    detail.style.fontSize = "0.9rem";
+    detail.textContent = (it.location ? "場所: " + it.location + " / " : "") + (it.details || "");
+
+    const actions = document.createElement("div");
+    actions.className = "schedule-actions";
+
+    const calBtn = document.createElement("button");
+    calBtn.className = "schedule-mini-btn";
+    calBtn.textContent = "Googleカレンダーに追加";
+    calBtn.onclick = () => window.open(buildGoogleCalendarUrl(it), "_blank");
+
+    actions.appendChild(calBtn);
+    box.appendChild(title);
+    box.appendChild(meta);
+    box.appendChild(detail);
+    box.appendChild(actions);
+
+    root.appendChild(box);
+  });
+}
+
+function bindPublicSchedules() {
+  const commonRef = ref(db, "schedules_public/common");
+  const areaRef = ref(db, "schedules_public/" + currentAreaKey);
+
+  let commonData = {};
+  let areaData = {};
+
+  const mergeAndRender = () => {
+    const merged = { ...commonData, ...areaData };
+    const list = Object.keys(merged)
+      .filter((k) => k !== "_init")
+      .map((k) => ({ id: k, ...merged[k] }))
+      .sort((a, b) => (a.startAt || 0) - (b.startAt || 0));
+    renderPublicSchedules(list);
+  };
+
+  onValue(commonRef, (snap) => {
+    commonData = snap.val() || {};
+    mergeAndRender();
+  });
+
+  if (currentAreaKey && currentAreaKey !== "common") {
+    onValue(areaRef, (snap) => {
+      areaData = snap.val() || {};
+      mergeAndRender();
+    });
+  } else {
+    areaData = {};
+  }
+}
+
+window.submitScheduleProposal = async () => {
+  const msg = document.getElementById("sch-submit-msg");
+  const title = (document.getElementById("sch-title").value || "").trim();
+  const date = document.getElementById("sch-date").value;
+  const start = document.getElementById("sch-start").value;
+  const end = document.getElementById("sch-end").value;
+  const location = (document.getElementById("sch-location").value || "").trim();
+  const details = (document.getElementById("sch-details").value || "").trim();
+
+  if (!currentUid) {
+    msg.textContent = "認証準備中です。少し待って再実行してください。";
+    return;
+  }
+  if (!title || !date || !start || !end) {
+    msg.textContent = "タイトル、日付、開始時刻、終了時刻を入力してください。";
+    return;
+  }
+
+  const startAt = new Date(date + "T" + start).getTime();
+  const endAt = new Date(date + "T" + end).getTime();
+  if (endAt <= startAt) {
+    msg.textContent = "終了時刻は開始時刻より後にしてください。";
+    return;
+  }
+
+  await push(ref(db, "schedule_submissions"), {
+    title,
+    startAt,
+    endAt,
+    allDay: false,
+    location,
+    details,
+    areaKey: currentAreaKey || "common",
+    status: "pending",
+    submitterUid: currentUid,
+    submittedAt: Date.now(),
+    reviewedAt: null,
+    reviewedBy: null,
+    reviewComment: ""
+  });
+
+  document.getElementById("sch-title").value = "";
+  document.getElementById("sch-date").value = "";
+  document.getElementById("sch-start").value = "";
+  document.getElementById("sch-end").value = "";
+  document.getElementById("sch-location").value = "";
+  document.getElementById("sch-details").value = "";
+  msg.textContent = "提案を送信しました。管理者承認後に公開されます。";
+};
+
+function renderSubmissionReview(items) {
+  const root = document.getElementById("submission-review-list");
+  if (!root) return;
+
+  root.innerHTML = "";
+  if (!items.length) {
+    root.innerHTML = "<p style='color:#888;'>承認待ちはありません。</p>";
+    return;
+  }
+
+  items.forEach((it) => {
+    const box = document.createElement("div");
+    box.className = "schedule-item";
+
+    box.innerHTML =
+      "<div class='schedule-item-title'>" + (it.title || "無題") + "</div>" +
+      "<div class='schedule-item-meta'>"
+      + formatDateTime(it.startAt) + " - " + formatDateTime(it.endAt)
+      + " / area: " + (it.areaKey || "common")
+      + "</div>" +
+      "<div style='font-size:0.9rem;'>"
+      + (it.location ? "場所: " + it.location + " / " : "")
+      + (it.details || "")
+      + "</div>";
+
+    const actions = document.createElement("div");
+    actions.className = "schedule-actions";
+
+    const okBtn = document.createElement("button");
+    okBtn.className = "schedule-mini-btn";
+    okBtn.textContent = "承認";
+    okBtn.onclick = () => approveSubmission(it.id);
+
+    const ngBtn = document.createElement("button");
+    ngBtn.className = "schedule-mini-btn";
+    ngBtn.textContent = "却下";
+    ngBtn.onclick = () => rejectSubmission(it.id);
+
+    actions.appendChild(okBtn);
+    actions.appendChild(ngBtn);
+    box.appendChild(actions);
+    root.appendChild(box);
+  });
+}
+
+async function approveSubmission(id) {
+  const sRef = ref(db, "schedule_submissions/" + id);
+  const snap = await get(sRef);
+  if (!snap.exists()) return;
+  const s = snap.val();
+
+  await push(ref(db, "schedules_public/" + (s.areaKey || "common")), {
+    title: s.title,
+    startAt: s.startAt,
+    endAt: s.endAt,
+    allDay: !!s.allDay,
+    location: s.location || "",
+    details: s.details || "",
+    createdAt: Date.now(),
+    createdBy: currentUid
+  });
+
+  await update(sRef, {
+    status: "approved",
+    reviewedAt: Date.now(),
+    reviewedBy: currentUid
+  });
+}
+
+async function rejectSubmission(id) {
+  const sRef = ref(db, "schedule_submissions/" + id);
+  await update(sRef, {
+    status: "rejected",
+    reviewedAt: Date.now(),
+    reviewedBy: currentUid
+  });
+}
+
+function bindSubmissionReview() {
+  const card = document.getElementById("admin-review-card");
+  if (!card) return;
+
+  const adminRef = ref(db, "admins/" + currentUid);
+  onValue(adminRef, (s) => {
+    const isAdmin = s.exists() && s.val() === true;
+    card.style.display = isAdmin ? "block" : "none";
+    if (!isAdmin) return;
+
+    onValue(ref(db, "schedule_submissions"), (snap) => {
+      const all = [];
+      snap.forEach((c) => {
+        const v = c.val() || {};
+        if (v.status === "pending") all.push({ id: c.key, ...v });
+      });
+      all.sort((a, b) => (a.submittedAt || 0) - (b.submittedAt || 0));
+      renderSubmissionReview(all);
+    });
+  });
+}
+
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    try {
+      await signInAnonymously(auth);
+    } catch (e) {
+      console.error("匿名認証エラー:", e);
+      alert("認証に失敗しました。Firebase Authentication の匿名認証を有効化してください。");
+    }
+    return;
+  }
+
+  currentUid = user.uid;
+  currentAreaKey = getAreaKeyFromStorage();
+  userRef = ref(db, "users/" + user.uid);
+  isAuthReady = true;
+
+  if (!isUserListenerBound) {
+    bindUserDataListener();
+    isUserListenerBound = true;
+  }
+  if (!scheduleWatchBound) {
+    bindPublicSchedules();
+    scheduleWatchBound = true;
+  }
+  if (!submissionWatchBound) {
+    bindSubmissionReview();
+    submissionWatchBound = true;
+  }
+});
+    
+// --- 唱題タイマーロジック ---
+    let startTime, timerInterval, elapsedTime = 0, isRunning = false;
+    const startBtn = document.getElementById('startBtn');
+    const display = document.getElementById('timer-display');
+    const saveBtn = document.getElementById('saveBtn');
+
+    // 1. スタート・ストップ
+    startBtn.onclick = () => {
+        if (!userRef) { window.toggleSettings(); return; }
+        if (!isRunning) {
+            isRunning = true; startBtn.innerText = "ストップ";
+            startTime = Date.now();
+            timerInterval = setInterval(() => {
+                const diff = Date.now() - startTime + elapsedTime;
+                const hh = Math.floor(diff / 3600000).toString().padStart(2, '0');
+                const mm = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
+                const ss = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
+                display.innerText = `${hh}:${mm}:${ss}`;
+                document.getElementById('session-count').innerText = `${Math.floor(diff / 1500)} 遍`;
+            }, 100);
+            saveBtn.style.display = "none";
+        } else {
+            isRunning = false; startBtn.innerText = "再開";
+            clearInterval(timerInterval);
+            elapsedTime += Date.now() - startTime;
+            if (elapsedTime >= 1500) saveBtn.style.display = "block"; // 1500ms(1遍)以上で保存可能
+        }
+    };
+
+    // 2. リセット機能
+    window.resetTimer = () => {
+        if (isRunning) {
+            clearInterval(timerInterval);
+            isRunning = false;
+        }
+        elapsedTime = 0;
+        display.innerText = "00:00:00";
+        document.getElementById('session-count').innerText = "0 遍";
+        startBtn.innerText = "スタート";
+        saveBtn.style.display = "none";
+    };
+
+    // 3. データの保存（ここが動作していませんでした）
+    window.saveData = async () => {
+        if (!userRef) return;
+
+        try {
+            const sessionCount = Math.floor(elapsedTime / 1500);
+            const snapshot = await get(userRef);
+            const data = snapshot.val() || { total: 0, totalMs: 0 };
+
+            await update(userRef, {
+                total: (data.total || 0) + sessionCount,
+                totalMs: (data.totalMs || 0) + elapsedTime
+            });
+
+            alert("記録を保存しました！");
+            resetTimer(); // 保存後にタイマーをリセット
+        } catch (error) {
+            console.error("保存エラー:", error);
+            alert("保存に失敗しました。ネット接続を確認してください。");
+        }
+    };
+
+    // データのリアルタイム反映
+    // ===== お知らせ機能 =====
+const noticeRef = ref(db, "noticeBoard");
+const noticeList = document.getElementById("notice-list");
+
+function formatNoticeTime(ts) {
+  const d = new Date(ts || Date.now());
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  const h = String(d.getHours()).padStart(2, "0");
+  const min = String(d.getMinutes()).padStart(2, "0");
+  return y + "/" + m + "/" + day + " " + h + ":" + min;
+}
+
+if (noticeList) {
+  const q = query(noticeRef, orderByChild("createdAt"), limitToLast(30));
+  onValue(q, (snapshot) => {
+    const items = [];
+    snapshot.forEach((child) => items.push(child.val()));
+    items.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+    noticeList.innerHTML = "";
+    if (!items.length) {
+      noticeList.innerHTML = '<p class="notice-empty">現在お知らせはありません。</p>';
+      return;
+    }
+
+    items.forEach((item) => {
+      const row = document.createElement("div");
+      row.className = "notice-item";
+
+      const meta = document.createElement("div");
+      meta.className = "notice-meta";
+      meta.innerHTML =
+        "<span>" + (item.author || "運営") + "</span>" +
+        "<span>" + formatNoticeTime(item.createdAt) + "</span>";
+
+      const text = document.createElement("div");
+      text.className = "notice-text";
+      text.textContent = item.text || "";
+
+      row.appendChild(meta);
+      row.appendChild(text);
+      noticeList.appendChild(row);
+    });
+  });
+}
+</script>
+
+<script>
+    const soukuData = {
+        'tokyo': ['新宿総区', '港総区', '千代田区', '文京区', '台東区', '中央区', '大田総区', '品川総区', '世田谷総区', '目黒総区', '杉並総区', '中野総区', '渋谷総区', '練馬総区', '豊島総区', '北総区', '板橋総区', '足立総区', '江東総区', '墨田総区', '荒川総区', '江戸川総区', '葛飾総区'],
+        'dai2tokyo': ['武蔵野総区', '小金井総区', '新立川総区', '八王子総区', '秋川総区', '青梅総区', '学園総区', '村山総区', '町田総区', '多摩池田総区', '府中総区', '調布総区'],
+        'toukaidou': ['神奈川', '静岡'], 'kantou': ['千葉', '埼玉', '茨城', '群馬', '栃木'], 'kansai': ['大阪', '兵庫', '京都', '滋賀', '奈良', '和歌山'],
+        'hokkaido': ['札幌', '旭川', '函館', '釧路'], 'touhoku': ['宮城', '岩手', '青森', '秋田', '山形', '福島'], 'chuubu': ['愛知', '三重', '岐阜'],
+        'shinetsu': ['長野', '新潟'], 'hokuriku': ['石川', '富山', '福井'], 'chuugoku': ['広島', '岡山', '山口', '鳥取', '島根'],
+        'shikoku': ['香川', '徳島', '愛媛', '高知'], 'kyushu': ['福岡', '佐賀', '長崎', '熊本', '大分', '宮崎', '鹿児島'], 'okinawa': ['沖縄本島', '先島']
+    };
+
+    function toggleSettings() {
+        const modal = document.getElementById('settings-modal');
+        modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+        const sn = localStorage.getItem('sokaUsername');
+        if(sn) document.getElementById('input-username').value = sn;
+    }
+
+    function updateSoukuList() {
+        const h = document.getElementById('select-houmen').value;
+        const s = document.getElementById('select-souku');
+        s.innerHTML = '<option value="">総区を選択してください</option>';
+        if (soukuData[h]) {
+            soukuData[h].forEach(n => {
+                const o = document.createElement('option');
+                o.value = h + '-' + n; o.innerText = n; s.appendChild(o);
+            });
+        }
+    }
+
+    function applyAreaSettings(key) {
+        document.querySelectorAll('.area-content').forEach(el => el.style.display = 'none');
+        const sc = document.getElementById('sched-' + key); if(sc) sc.style.display = 'block';
+        const ac = document.getElementById('action-' + key); if(ac) ac.style.display = 'block';
+        document.getElementById('sched-default').style.display = sc ? 'none' : 'block';
+        document.getElementById('action-default').style.display = ac ? 'none' : 'block';
+    }
+
+
+   function openTab(evt, tabId) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-link, .tab-btn').forEach(el => el.classList.remove('active'));
+
+  const target = document.getElementById(tabId);
+  if (target) target.classList.add('active');
+  if (evt && evt.currentTarget) evt.currentTarget.classList.add('active');
+}
+
+window.onload = () => {
+    const a = localStorage.getItem('userArea');
+    if (a) applyAreaSettings(a);
+
+    setInterval(() => {
+        const now = new Date();
+        const target = new Date(now.getFullYear(), 6, 11);
+        let diff = target - now;
+        if (diff < 0) diff = new Date(now.getFullYear() + 1, 6, 11) - now;
+        const d = Math.floor(diff / (1000*60*60*24));
+        const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+        const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+        const s = Math.floor((diff % (1000*60)) / 1000);
+        document.getElementById("timer").innerText = `${d}日 ${h}時 ${m}分 ${s}秒`;
+    }, 1000);
+};
+</script>
+<script>
+  const GOAL_DATE_KEY = "myGoalDate";
+  const GOAL_ITEMS_KEY = "myGoalItems";
+
+  function getGoalItems() {
+    try {
+      const raw = localStorage.getItem(GOAL_ITEMS_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function setGoalItems(items) {
+    localStorage.setItem(GOAL_ITEMS_KEY, JSON.stringify(items));
+  }
+
+  function updateGoalDateCountdown() {
+    const el = document.getElementById("goal-date-countdown");
+    const raw = localStorage.getItem(GOAL_DATE_KEY);
+
+    if (!el) return;
+    if (!raw) {
+      el.textContent = "目標日を設定してください";
+      return;
+    }
+
+    const today = new Date();
+    const target = new Date(raw + "T00:00:00");
+    const diffMs = target.getTime() - new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
+    const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+
+    if (diffDays > 0) {
+      el.textContent = "目標日まであと" + diffDays + "日";
+    } else if (diffDays === 0) {
+      el.textContent = "目標日は今日です";
+    } else {
+      el.textContent = "目標日を" + Math.abs(diffDays) + "日過ぎています";
+    }
+  }
+
+  function saveGoalDate() {
+    const input = document.getElementById("goal-date-input");
+    if (!input || !input.value) {
+      alert("目標日を選択してください");
+      return;
+    }
+    localStorage.setItem(GOAL_DATE_KEY, input.value);
+    updateGoalDateCountdown();
+  }
+
+  function renderGoalItems() {
+    const container = document.getElementById("goal-items-container");
+    if (!container) return;
+
+    const items = getGoalItems();
+    container.innerHTML = "";
+
+    if (items.length === 0) {
+      const empty = document.createElement("p");
+      empty.style.margin = "0";
+      empty.style.color = "#6e7fa8";
+      empty.textContent = "目標を追加してください";
+      container.appendChild(empty);
+      return;
+    }
+
+    items.forEach((item, index) => {
+      const row = document.createElement("div");
+      row.className = "goal-item-row";
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.className = "goal-item-checkbox";
+      checkbox.checked = !!item.done;
+      checkbox.onchange = () => toggleGoalDone(index, checkbox.checked);
+
+      const text = document.createElement("input");
+      text.type = "text";
+      text.className = "goal-item-text" + (item.done ? " done" : "");
+      text.value = item.text || "";
+      text.onchange = () => updateGoalText(index, text.value);
+
+      const del = document.createElement("button");
+      del.type = "button";
+      del.className = "goal-item-delete";
+      del.textContent = "削除";
+      del.onclick = () => deleteGoalItem(index);
+
+      row.appendChild(checkbox);
+      row.appendChild(text);
+      row.appendChild(del);
+      container.appendChild(row);
+    });
+  }
+
+  function addGoalItem() {
+    const input = document.getElementById("goal-item-input");
+    if (!input) return;
+
+    const value = input.value.trim();
+    if (!value) return;
+
+    const items = getGoalItems();
+    items.push({ text: value, done: false });
+    setGoalItems(items);
+
+    input.value = "";
+    renderGoalItems();
+  }
+
+  function toggleGoalDone(index, done) {
+    const items = getGoalItems();
+    if (!items[index]) return;
+    items[index].done = done;
+    setGoalItems(items);
+    renderGoalItems();
+  }
+
+  function updateGoalText(index, text) {
+    const items = getGoalItems();
+    if (!items[index]) return;
+    items[index].text = text.trim();
+    setGoalItems(items);
+  }
+
+  function deleteGoalItem(index) {
+    const items = getGoalItems();
+    items.splice(index, 1);
+    setGoalItems(items);
+    renderGoalItems();
+  }
+
+  window.saveGoalDate = saveGoalDate;
+  window.addGoalItem = addGoalItem;
+
+  const _originalOnload = window.onload;
+  window.onload = () => {
+    if (typeof _originalOnload === "function") _originalOnload();
+
+    const dateInput = document.getElementById("goal-date-input");
+    const savedDate = localStorage.getItem(GOAL_DATE_KEY);
+    if (dateInput && savedDate) dateInput.value = savedDate;
+
+    updateGoalDateCountdown();
+    renderGoalItems();
+  };
+</script>
+    <script>
+    // 管理人さん(sw.js)を登録するコード
+   if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+      .then(reg => console.log('ServiceWorker registered:', reg))
+      .catch(err => console.error('SW registration failed:', err));
+  });
+}
+</script>
 </body>
 </html>
