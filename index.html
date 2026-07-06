@@ -9,22 +9,22 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="創価学会男子部公式サイト">
 <meta property="og:description" content="日頃の活動をサポートする公式ページです。">
-<meta property="og:url" content="https://sgmen-1115.github.io/">
-<meta property="og:image" content="https://sgmen-1115.github.io/ogp.jpg">
+<meta property="og:url" content="https://sgmen-1115.github.io/viva-youth/">
+<meta property="og:image" content="https://sgmen-1115.github.io/viva-youth/icon512.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="創価学会男子部公式サイト">
 <meta name="twitter:description" content="日頃の活動をサポートする公式ページです。">
-<meta name="twitter:image" content="https://sgmen-1115.github.io/ogp.jpg">
+<meta name="twitter:image" content="https://sgmen-1115.github.io/viva-youth/icon512.jpg">
 
-<link rel="manifest" href="/manifest.json">
+<link rel="manifest" href="./manifest.json">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="男子部アプリ">
-    <link rel="apple-touch-icon" href="icon-192★.png">
+    <link rel="apple-touch-icon" href="./icon192.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,7 +40,7 @@
   --text-blue: #17325f;
 
   /* 背景画像のパス（ここだけ後で変更しやすいよう変数化） */
-  --hero-image: url("title_pic.jpg");
+  --hero-image: none;
 }
 
 body {
@@ -773,7 +773,6 @@ font-size: 0.8rem;
 　  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
    import { getDatabase, ref, get, update, onValue, push, query, orderByChild, limitToLast } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-    import { getDatabase, ref, get, update, onValue, push, query, orderByChild, limitToLast } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyCFEUoUyWhz8Qlr2Z261LOlzwe7BIQQTx4",
@@ -1513,7 +1512,7 @@ window.onload = () => {
     // 管理人さん(sw.js)を登録するコード
    if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+    navigator.serviceWorker.register('./sw.js', { scope: './' })
       .then(reg => console.log('ServiceWorker registered:', reg))
       .catch(err => console.error('SW registration failed:', err));
   });
