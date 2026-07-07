@@ -244,6 +244,75 @@ body::after {
     linear-gradient(180deg, rgba(206,166,69,0.12) 0%, rgba(175,136,47,0.30) 100%),
     var(--hero-image) center bottom / cover no-repeat;
 }
+
+/* ホーム背景: 大きな輪が重なるレイヤー */
+#home .page-visual {
+  background:
+    radial-gradient(
+      circle at 10% 20%,
+      transparent 0 16vmin,
+      rgba(255, 246, 205, 0.62) 16vmin 22vmin,
+      transparent 22.4vmin
+    ),
+    radial-gradient(
+      circle at 34% 68%,
+      transparent 0 20vmin,
+      rgba(255, 233, 172, 0.52) 20vmin 27vmin,
+      transparent 27.4vmin
+    ),
+    radial-gradient(
+      circle at 78% 24%,
+      transparent 0 18vmin,
+      rgba(255, 239, 190, 0.56) 18vmin 25vmin,
+      transparent 25.5vmin
+    ),
+    radial-gradient(
+      circle at 86% 78%,
+      transparent 0 22vmin,
+      rgba(255, 226, 153, 0.5) 22vmin 29vmin,
+      transparent 29.4vmin
+    ),
+    linear-gradient(180deg, #fff8d9 0%, #f7df99 52%, #e7c774 100%);
+}
+
+#home .page-visual::before {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.38), transparent 28%),
+    radial-gradient(circle at 82% 74%, rgba(255, 255, 255, 0.24), transparent 30%),
+    linear-gradient(145deg, rgba(255, 252, 237, 0.2), rgba(214, 171, 78, 0.16));
+}
+
+@media (max-width: 768px) {
+  #home .page-visual {
+    background:
+      radial-gradient(
+        circle at 8% 16%,
+        transparent 0 22vmin,
+        rgba(255, 246, 205, 0.58) 22vmin 28vmin,
+        transparent 28.5vmin
+      ),
+      radial-gradient(
+        circle at 34% 64%,
+        transparent 0 24vmin,
+        rgba(255, 233, 172, 0.48) 24vmin 31vmin,
+        transparent 31.4vmin
+      ),
+      radial-gradient(
+        circle at 88% 20%,
+        transparent 0 20vmin,
+        rgba(255, 239, 190, 0.52) 20vmin 27vmin,
+        transparent 27.5vmin
+      ),
+      radial-gradient(
+        circle at 84% 80%,
+        transparent 0 24vmin,
+        rgba(255, 226, 153, 0.46) 24vmin 31vmin,
+        transparent 31.5vmin
+      ),
+      linear-gradient(180deg, #fff8d9 0%, #f7df99 52%, #e7c774 100%);
+  }
+}
+
 .page-visual::before {
   content: "";
   position: absolute;
@@ -257,7 +326,7 @@ body::after {
 /* ヒーローテキスト */
 .hero-container {
   position: relative;
-  min-height: 17vh;
+  min-height: 20vh;
 }
 .hero-content {
   position: absolute;
