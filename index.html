@@ -467,6 +467,7 @@ body::after {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
   background-color: var(--primary-color);
   color: white;
   padding: 15px;
@@ -580,9 +581,16 @@ body::after {
 .notice-text {
   line-height: 1.45;
   word-break: break-word;
+  white-space: pre-line;
 }
 .notice-empty {
   margin: 0;
+}
+
+.action-link-stack {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 14px;
 }
 .goal-date-row {
   display: flex;
@@ -745,20 +753,8 @@ font-size: 0.8rem;
 
 <div class="tab-menu">
   <button class="tab-link active" onclick="openTab(event, 'home')">ホーム</button>
-  <button class="tab-link" onclick="openTab(event, 'mine')">Believe in プロジェクト</button>
+  <button class="tab-link" onclick="openTab(event, 'mine')">写真投稿</button>
 </div>
-
-<div id="username-register-modal" aria-hidden="true">
-  <div class="username-register-card">
-    <h3 class="username-register-title">ユーザー名登録</h3>
-    <p id="username-register-help" class="username-register-help">ユーザー名を登録してください（2文字以上）</p>
-    <input id="username-register-input" class="username-register-input" type="text" maxlength="30" placeholder="ユーザー名を入力">
-    <p id="username-register-error" class="username-register-error"></p>
-    <button id="username-register-submit" class="oumi-btn">登録してはじめる</button>
-  </div>
-</div>
-
-<div id="app-toast" aria-live="polite" aria-atomic="true"></div>
 
  <div id="home" class="tab-content active">
   <div class="page-visual">
@@ -791,13 +787,21 @@ font-size: 0.8rem;
 
       <div class="sub-title">注目動画</div>
       <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/WORGpCGs3GY?start=483" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/fAPbSXblFFw" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
   </div>
 </div>
 
 <div id="mine" class="tab-content">
+
+<div class="sub-title">写真投稿</div>
+<div class="card">
+  <div class="action-link-stack">
+    <a class="oumi-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeacmsaopLvf0KmPsQJ_GnsJ97kK21085jussnSbs6ANRKh1Q/viewform" target="_blank" rel="noopener noreferrer">投稿フォーム</a>
+    <a class="oumi-btn" href="mailto:viva.katsushika@gmail.com?subject=%E3%83%93%E3%83%90%E3%81%8B%E3%81%A4%EF%BC%9A%E5%8A%9F%E5%BE%B3%E5%B1%95%E6%8A%95%E7%A8%BF&body=%E6%9C%AC%E3%83%A1%E3%83%BC%E3%83%AB%E3%81%AB%E5%8A%9F%E5%BE%B3%E5%B1%95%E3%81%A7%E6%8E%B2%E8%BC%89%E3%81%99%E3%82%8B%E7%B4%A0%E6%9D%90%EF%BC%88%E5%8B%95%E7%94%BB%EF%BC%89%E3%81%AA%E3%81%A9%E3%82%92%E6%B7%BB%E4%BB%98%E3%81%AE%E4%B8%8A%E3%80%81%E6%9C%AC%E6%96%87%E3%81%AB%E3%82%A8%E3%83%94%E3%82%BD%E3%83%BC%E3%83%89%EF%BC%88%E5%8A%9F%E5%BE%B3%E3%81%AE%E5%86%85%E5%AE%B9%EF%BC%89%E3%82%92%E8%A8%98%E8%BC%89%E3%81%97%E3%81%A6%E9%80%81%E4%BF%A1%E3%81%97%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84%E3%80%82">Googleアカウントがない方へ</a>
+  </div>
+</div>
 
 <div class="sub-title">目標設定</div>
 <div class="card">
@@ -820,273 +824,20 @@ font-size: 0.8rem;
 
   <div id="goal-items-container" class="goal-items-container"></div>
 </div>
-
-    <div class="sub-title">唱題カウンター</div>
-    <div class="card" style="text-align: center;">
-        <p id="user-display-name" style="font-size:0.8rem; color:var(--primary-color); font-weight:bold;"></p>
-        <div style="display: flex; justify-content: space-around; margin-bottom: 20px; background: #f0f7ff; padding: 15px; border-radius: 12px;">
-            <div><div style="font-size: 0.7rem;">累計遍数</div><div id="total-count" style="font-weight:bold;">0 遍</div></div>
-            <div><div style="font-size: 0.7rem;">累計時間</div><div id="total-time" style="font-weight:bold;">0:00</div></div>
-        </div>
-        <div id="timer-display" style="font-size: 3rem; font-weight: 300; margin: 10px 0;">00:00:00</div>
-        <div id="session-count" style="font-size: 1rem; color: #79bede; margin-bottom: 20px; font-weight: bold;">0 遍</div>
-
-        <button id="startBtn" class="oumi-btn">スタート</button>
-
-        <button id="saveBtn" class="oumi-btn" onclick="saveData()" style="display: none; background-color: #f39c12; margin-top:10px;">記録を保存</button>
-
-        <button id="resetBtn" onclick="resetTimer()" style="margin-top: 15px; background: none; border: none; color: #999; text-decoration: underline; font-size: 0.8rem; cursor: pointer;">タイマーをリセット</button>
-    </div>
 </div>
 
 <script type="module">
-　  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-  import { getDatabase, ref, get, update, onValue, query, orderByChild, limitToLast, runTransaction } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyCFEUoUyWhz8Qlr2Z261LOlzwe7BIQQTx4",
-        authDomain: "sgmen-db.firebaseapp.com",
-        databaseURL: "https://sgmen-db-default-rtdb.firebaseio.com",
-        projectId: "sgmen-db",
-        storageBucket: "sgmen-db.firebasestorage.app",
-        messagingSenderId: "968577713228",
-        appId: "1:968577713228:web:23eaf381b4be6db1fa60e9"
-    };
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-const auth = getAuth(app);
-
-let currentUsername = localStorage.getItem("sokaUsername") || "";
-let userRef = null;
-let isAuthReady = false;
-let isUserListenerBound = false;
-let toastTimer = null;
-
-function showAppToast(message, durationMs = 1800) {
-  const el = document.getElementById("app-toast");
-  if (!el) return;
-  el.textContent = message || "";
-  el.classList.add("show");
-  if (toastTimer) clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => {
-    el.classList.remove("show");
-  }, durationMs);
-}
-
-function usernameClaimKey(name) {
-  return encodeURIComponent((name || "").trim().toLowerCase());
-}
-
-function askUsernameWithModal(defaultValue, helpText, errorText) {
-  return new Promise((resolve) => {
-    const modal = document.getElementById("username-register-modal");
-    const input = document.getElementById("username-register-input");
-    const submit = document.getElementById("username-register-submit");
-    const help = document.getElementById("username-register-help");
-    const error = document.getElementById("username-register-error");
-
-    help.textContent = helpText || "ユーザー名を登録してください（2文字以上）";
-    error.textContent = errorText || "";
-    input.value = defaultValue || "";
-    modal.style.display = "flex";
-    modal.setAttribute("aria-hidden", "false");
-
-    const finish = () => {
-      const value = (input.value || "").trim();
-      submit.onclick = null;
-      input.onkeydown = null;
-      modal.style.display = "none";
-      modal.setAttribute("aria-hidden", "true");
-      resolve(value);
-    };
-
-    submit.onclick = finish;
-    input.onkeydown = (ev) => {
-      if (ev.key === "Enter") {
-        ev.preventDefault();
-        finish();
-      }
-    };
-
-    setTimeout(() => input.focus(), 0);
-  });
-}
-
-async function ensureUsernameRegistration(uid) {
-  let helpText = "ユーザー名を登録してください（2文字以上）";
-  let errorText = "";
-
-  while (true) {
-    const saved = (localStorage.getItem("sokaUsername") || "").trim();
-    let candidate = saved;
-
-    if (!candidate) {
-      candidate = await askUsernameWithModal("", helpText, errorText);
-    }
-
-    if (!candidate) {
-      helpText = "ユーザー名を登録してください（2文字以上）";
-      errorText = "ユーザー名は必須です。";
-      continue;
-    }
-    if (candidate.length < 2) {
-      localStorage.removeItem("sokaUsername");
-      helpText = "ユーザー名を登録してください（2文字以上）";
-      errorText = "ユーザー名は2文字以上で入力してください。";
-      continue;
-    }
-
-    const key = usernameClaimKey(candidate);
-    const claimRef = ref(db, "usernameClaims/" + key);
-    const tx = await runTransaction(claimRef, (current) => {
-      if (current === null || current === uid) return uid;
-      return;
-    });
-
-    if (!tx.committed) {
-      localStorage.removeItem("sokaUsername");
-      helpText = "別のユーザー名を入力してください。";
-      errorText = "そのユーザー名はすでに使用されています。";
-      continue;
-    }
-
-    localStorage.setItem("sokaUsername", candidate);
-    await update(ref(db, "users/" + uid), {
-      username: candidate,
-      usernameKey: key,
-      updatedAt: Date.now()
-    });
-
-    helpText = "ユーザー名を登録してください（2文字以上）";
-    errorText = "";
-    return candidate;
-  }
-}
-
-function bindUserDataListener() {
-  if (!userRef) return;
-
- onValue(userRef, (snapshot) => {
-  const data = snapshot.val() || { total: 0, totalMs: 0 };
-  const displayName = data.username || currentUsername || "匿名";
-  const heroWelcomeEl = document.getElementById("hero-user-welcome");
-  if (heroWelcomeEl) heroWelcomeEl.innerText = displayName + "さんようこそ！";
-  document.getElementById("user-display-name").innerText = "利用者: " + displayName;
-    document.getElementById("total-count").innerText =
-      (data.total || 0).toLocaleString() + " 遍";
-    const h = Math.floor((data.totalMs || 0) / 3600000);
-    const m = Math.floor(((data.totalMs || 0) % 3600000) / 60000);
-    document.getElementById("total-time").innerText =
-      h + ":" + m.toString().padStart(2, "0");
-  });
-}
-
-onAuthStateChanged(auth, async (user) => {
-if (!user) {
-try {
-await signInAnonymously(auth);
-} catch (e) {
-console.error("匿名認証エラー:", e);
-alert("認証に失敗しました。Firebase Authentication の匿名認証を有効化してください。");
-}
-return;
-}
-
-currentUsername = await ensureUsernameRegistration(user.uid);
-userRef = ref(db, "users/" + user.uid);
-isAuthReady = true;
-if (!isUserListenerBound) {
-bindUserDataListener();
-isUserListenerBound = true;
-}
-
-if (typeof window.refreshGoalView === "function") {
-  window.refreshGoalView();
-}
-});
-
-    // --- 唱題カウンター ---
-const CHANT_MS_PER_COUNT = 1200;
-
-// --- 唱題タイマーロジック ---
-    let startTime, timerInterval, elapsedTime = 0, isRunning = false;
-    const startBtn = document.getElementById('startBtn');
-    const display = document.getElementById('timer-display');
-    const saveBtn = document.getElementById('saveBtn');
-
-    // 1. スタート・ストップ
-    startBtn.onclick = () => {
-      if (!userRef) { alert("ユーザー名登録の初期化中です。少し待ってください。"); return; }
-        if (!isRunning) {
-            isRunning = true; startBtn.innerText = "ストップ";
-            startTime = Date.now();
-            timerInterval = setInterval(() => {
-                const diff = Date.now() - startTime + elapsedTime;
-                const hh = Math.floor(diff / 3600000).toString().padStart(2, '0');
-                const mm = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
-                const ss = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
-                display.innerText = `${hh}:${mm}:${ss}`;
-                document.getElementById('session-count').innerText = `${Math.floor(diff / CHANT_MS_PER_COUNT)} 遍`;
-            }, 100);
-            saveBtn.style.display = "none";
-        } else {
-            isRunning = false; startBtn.innerText = "再開";
-            clearInterval(timerInterval);
-            elapsedTime += Date.now() - startTime;
-              if (elapsedTime >= CHANT_MS_PER_COUNT) saveBtn.style.display = "block";
-        }
-    };
-
-    // 2. リセット機能
-    window.resetTimer = () => {
-        if (isRunning) {
-            clearInterval(timerInterval);
-            isRunning = false;
-        }
-        elapsedTime = 0;
-        display.innerText = "00:00:00";
-        document.getElementById('session-count').innerText = "0 遍";
-        startBtn.innerText = "スタート";
-        saveBtn.style.display = "none";
-    };
-
-    // 3. データの保存（ここが動作していませんでした）
-    window.saveData = async () => {
-        if (!userRef) return;
-
-        try {
-        const sessionCount = Math.floor(elapsedTime / CHANT_MS_PER_COUNT);
-            const snapshot = await get(userRef);
-            const data = snapshot.val() || { total: 0, totalMs: 0 };
-
-            await update(userRef, {
-                total: (data.total || 0) + sessionCount,
-                totalMs: (data.totalMs || 0) + elapsedTime
-            });
-
-          showAppToast("保存しました");
-            resetTimer(); // 保存後にタイマーをリセット
-        } catch (error) {
-            console.error("保存エラー:", error);
-            alert("保存に失敗しました。ネット接続を確認してください。");
-        }
-    };
-
-    // データのリアルタイム反映
-    // ===== お知らせ機能 =====
-const noticeRef = ref(db, "noticeBoard");
 const noticeList = document.getElementById("notice-list");
 const fixedNotices = [
   {
     author: "運営",
-    text: "9/13 第1回ユースの集い（青年幹視聴）",
-    createdAt: new Date("2026-09-13T09:00:00+09:00").getTime(),
+    text: "「ビバ！葛飾！」 11/8(日)＠葛飾平和講堂\n11 時（亀有・立石・戸田）、14 時（高砂・水元）",
+    createdAt: new Date("2026-11-08T09:00:00+09:00").getTime(),
   },
   {
     author: "運営",
-    text: "10/18 第2回ユースの集い",
-    createdAt: new Date("2026-10-18T09:00:00+09:00").getTime(),
+    text: "「ビバ活」\n①9/13(日)の青年幹後に各会館で（短時間）\n②10/12(月祝)11 時＠葛文（亀有・立石・戸田）\n  ＠柴平（高砂・水元）",
+    createdAt: new Date("2026-09-13T09:00:00+09:00").getTime(),
   },
 ];
 
@@ -1101,19 +852,11 @@ function formatNoticeTime(ts) {
 }
 
 if (noticeList) {
-  const q = query(noticeRef, orderByChild("createdAt"), limitToLast(30));
-  onValue(q, (snapshot) => {
-    const items = [];
-    snapshot.forEach((child) => items.push(child.val()));
-    items.push(...fixedNotices);
-    items.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-
-    noticeList.innerHTML = "";
-    if (!items.length) {
-      noticeList.innerHTML = '<p class="notice-empty">現在お知らせはありません。</p>';
-      return;
-    }
-
+  const items = [...fixedNotices].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+  noticeList.innerHTML = "";
+  if (!items.length) {
+    noticeList.innerHTML = '<p class="notice-empty">現在お知らせはありません。</p>';
+  } else {
     items.forEach((item) => {
       const row = document.createElement("div");
       row.className = "notice-item";
@@ -1132,7 +875,7 @@ if (noticeList) {
       row.appendChild(text);
       noticeList.appendChild(row);
     });
-  });
+  }
 }
 </script>
 
@@ -1165,8 +908,7 @@ window.onload = () => {
   const GOAL_ITEMS_KEY_PREFIX = "myGoalItems:";
 
   function goalStorageSuffix() {
-    const name = (localStorage.getItem("sokaUsername") || "guest").trim().toLowerCase();
-    return encodeURIComponent(name || "guest");
+    return "guest";
   }
 
   function goalDateKey() {
