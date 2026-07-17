@@ -910,6 +910,7 @@ if (noticeList) {
 
 <script>
 const TAB_IDS = ["home", "mine", "viva-day"];
+const INITIAL_SCROLL_OFFSET = 28;
 
 function openTab(evt, tabId, updateHash = true) {
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -945,7 +946,7 @@ function activateTabFromHash(resetScroll = false) {
 
   if (resetScroll) {
     requestAnimationFrame(() => {
-      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      window.scrollTo({ top: INITIAL_SCROLL_OFFSET, left: 0, behavior: "auto" });
     });
   }
 }
