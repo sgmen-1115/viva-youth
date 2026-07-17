@@ -386,6 +386,10 @@ body::after {
   opacity: 1;
 }
 
+.hero-content {
+  top: 8px;
+}
+
 /* 旧イラスト要素は完全停止 */
 .hero-illustration,
 .city-silhouette,
@@ -753,9 +757,6 @@ font-size: 0.8rem;
   <div class="page-visual">
     <div class="hero-container">
       <div class="hero-content">
-        <div id="hero-user-welcome" style="font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 8px; font-weight: bold;">
-          ようこそ！
-        </div>
         <h2 class="hero-title">
           <span style="color:#cf5f00;">ビバ！葛飾！</span>
         </h2>
@@ -787,8 +788,6 @@ font-size: 0.8rem;
 </div>
 
 <div id="mine" class="tab-content">
-
-<div class="sub-title">企画「わたしの功徳展」<br>写真投稿ページ</div>
 <div class="card">
   <div class="action-link-stack">
     <a class="oumi-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeacmsaopLvf0KmPsQJ_GnsJ97kK21085jussnSbs6ANRKh1Q/viewform" target="_blank" rel="noopener noreferrer">投稿フォーム</a>
@@ -800,7 +799,6 @@ font-size: 0.8rem;
 <div id="viva-day" class="tab-content">
   <div class="sub-title">「ビバ！葛飾！当日について」</div>
   <div class="card">
-    <div class="detail-badge">当日のご案内</div>
     <p class="detail-copy">イベントは２部制！
 第１部では、代表の信仰体験を新たな形で紹介する会合を開催。
 続く、第２部では、ブース企画を行い、展示や参加者どうしの対話など、信仰の素晴らしさを「見て、聞いて、話せる」内容になっています。
@@ -809,7 +807,7 @@ font-size: 0.8rem;
 目玉企画は「わたしの功徳展」です。今月末にユース世代に写真応募フォームで投稿された「自分なりの功徳」のエピソードと写真、動画などを展示します。
 信仰の力を若者目線で伝える広布拡大企画です。
 葛飾中に功徳が広がっている様子をお伝えしていく思いも込めています。</p>
-    <div class="detail-callout">このページは、当日の雰囲気や見どころをわかりやすくまとめた案内です。</div>
+    <div class="detail-callout">参加対象は、男子部、学生部、ハピネス、池田華陽会に加え、中・高等部員！</div>
   </div>
 </div>
 
@@ -818,17 +816,17 @@ const noticeList = document.getElementById("notice-list");
 const fixedNotices = [
   {
     author: "運営",
-    text: "①第1回「ビバ活」\n日時：9月13日（日）\n場所：青年幹視聴後、各会館にて",
+    text: "第1回「ビバ活」\n日時：9月13日（日）\n場所：青年幹視聴後、各会館にて",
     createdAt: new Date("2026-09-13T09:00:00+09:00").getTime(),
   },
   {
     author: "運営",
-    text: "②第2回「ビバ活」\n日時：10月12日（月祝）11時～\n場所：葛飾文化会館",
+    text: "第2回「ビバ活」\n日時：10月12日（月祝）11時～\n場所：葛飾文化会館",
     createdAt: new Date("2026-10-12T09:00:00+09:00").getTime(),
   },
   {
     author: "運営",
-    text: "③ユースイベント「ビバ！葛飾！」\n日時：11月8日（日）\n※11 時（亀有・立石・戸田）、14 時（高砂・水元）\n場所：葛飾平和講堂",
+    text: "ユースイベント「ビバ！葛飾！」\n日時：11月8日（日）\n※11 時（亀有・立石・戸田）、14 時（高砂・水元）\n場所：葛飾平和講堂",
     createdAt: new Date("2026-11-08T09:00:00+09:00").getTime(),
   },
 ];
