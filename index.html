@@ -592,99 +592,11 @@ body::after {
   gap: 10px;
   margin-bottom: 14px;
 }
-.goal-date-row {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
 
-.goal-date-input {
-  flex: 1;
-  min-width: 0;
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid #d7dbe8;
-  font-family: inherit;
-  font-size: 0.95rem;
-  box-sizing: border-box;
-}
-
-.goal-save-date-btn,
-.goal-add-btn {
-  width: auto;
-  min-width: 110px;
-  padding: 10px 14px;
-}
-
-.goal-date-countdown {
-  margin: 10px 0 0;
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: #7c5d16;
-}
-
-.goal-add-row {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.goal-items-container {
-  margin-top: 10px;
-  display: grid;
-  gap: 8px;
-}
-
-.goal-item-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 248, 220, 0.82);
-  border: 1px solid #f2dfa2;
-  border-radius: 10px;
-  padding: 8px;
-}
-
-.goal-item-checkbox {
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-}
-
-.goal-item-text {
-  flex: 1;
-  min-width: 0;
-  border: 1px solid #d7dbe8;
-  border-radius: 8px;
-  padding: 8px 10px;
-  font-size: 0.9rem;
-  font-family: inherit;
-}
-
-.goal-item-text.done {
-  text-decoration: line-through;
-  opacity: 0.65;
-}
-
-.goal-item-delete {
-  border: none;
-  background: transparent;
-  color: #9b8040;
-  font-size: 0.85rem;
-  cursor: pointer;
-}
-
-@media (max-width: 768px) {
-  .goal-date-row,
-  .goal-add-row {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .goal-save-date-btn,
-  .goal-add-btn {
-    width: 100%;
-  }
+.action-link-stack .oumi-btn {
+  min-height: 64px;
+  font-size: 1.05rem;
+  padding: 18px 16px;
 }
 
 .schedule-form-grid {
@@ -774,7 +686,7 @@ font-size: 0.8rem;
         <img src="./home.jpg" alt="葛飾ユースアクションフェス" class="home-photo">
       </div>
       <div class="card" style="margin-top: -12px; text-align: center;">
-        <span style="font-size: 0.8rem; color: rgba(255,255,255,0.75);">葛飾ユースアクションフェスまで</span>
+        <span style="font-size: 0.8rem; color: rgba(255,255,255,0.75);">１１・８　ユースイベント「ビバ！葛飾！」まで</span>
         <div id="timer" style="font-size: 1.8rem; font-weight: bold; color: var(--white);">計算中...</div>
       </div>
 
@@ -801,28 +713,6 @@ font-size: 0.8rem;
     <a class="oumi-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeacmsaopLvf0KmPsQJ_GnsJ97kK21085jussnSbs6ANRKh1Q/viewform" target="_blank" rel="noopener noreferrer">投稿フォーム</a>
     <a class="oumi-btn" href="mailto:viva.katsushika@gmail.com?subject=%E3%83%93%E3%83%90%E3%81%8B%E3%81%A4%EF%BC%9A%E5%8A%9F%E5%BE%B3%E5%B1%95%E6%8A%95%E7%A8%BF&body=%E6%9C%AC%E3%83%A1%E3%83%BC%E3%83%AB%E3%81%AB%E5%8A%9F%E5%BE%B3%E5%B1%95%E3%81%A7%E6%8E%B2%E8%BC%89%E3%81%99%E3%82%8B%E7%B4%A0%E6%9D%90%EF%BC%88%E5%8B%95%E7%94%BB%EF%BC%89%E3%81%AA%E3%81%A9%E3%82%92%E6%B7%BB%E4%BB%98%E3%81%AE%E4%B8%8A%E3%80%81%E6%9C%AC%E6%96%87%E3%81%AB%E3%82%A8%E3%83%94%E3%82%BD%E3%83%BC%E3%83%89%EF%BC%88%E5%8A%9F%E5%BE%B3%E3%81%AE%E5%86%85%E5%AE%B9%EF%BC%89%E3%82%92%E8%A8%98%E8%BC%89%E3%81%97%E3%81%A6%E9%80%81%E4%BF%A1%E3%81%97%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84%E3%80%82">Googleアカウントがない方へ</a>
   </div>
-</div>
-
-<div class="sub-title">目標設定</div>
-<div class="card">
-  <label style="font-size: 0.8rem; font-weight: bold; color: #666; display: block; margin-bottom: 8px;">
-    目標日
-  </label>
-  <div class="goal-date-row">
-    <input type="date" id="goal-date-input" class="goal-date-input">
-    <button class="oumi-btn goal-save-date-btn" onclick="saveGoalDate()">目標日を保存</button>
-  </div>
-  <p id="goal-date-countdown" class="goal-date-countdown">※目標日を設定してください</p>
-
-  <label style="font-size: 0.8rem; font-weight: bold; color: #666; display: block; margin: 14px 0 8px;">
-    目標リスト
-  </label>
-  <div class="goal-add-row">
-    <input type="text" id="goal-item-input" class="goal-textarea" placeholder="例：毎日15分唱題する">
-    <button class="oumi-btn goal-add-btn" onclick="addGoalItem()">目標を追加</button>
-  </div>
-
-  <div id="goal-items-container" class="goal-items-container"></div>
 </div>
 </div>
 
@@ -902,167 +792,6 @@ window.onload = () => {
         document.getElementById("timer").innerText = `${d}日 ${h}時 ${m}分 ${s}秒`;
     }, 1000);
 };
-</script>
-<script>
-  const GOAL_DATE_KEY_PREFIX = "myGoalDate:";
-  const GOAL_ITEMS_KEY_PREFIX = "myGoalItems:";
-
-  function goalStorageSuffix() {
-    return "guest";
-  }
-
-  function goalDateKey() {
-    return GOAL_DATE_KEY_PREFIX + goalStorageSuffix();
-  }
-
-  function goalItemsKey() {
-    return GOAL_ITEMS_KEY_PREFIX + goalStorageSuffix();
-  }
-
-  function getGoalItems() {
-    try {
-      const raw = localStorage.getItem(goalItemsKey());
-      return raw ? JSON.parse(raw) : [];
-    } catch (e) {
-      return [];
-    }
-  }
-
-  function setGoalItems(items) {
-    localStorage.setItem(goalItemsKey(), JSON.stringify(items));
-  }
-
-  function updateGoalDateCountdown() {
-    const el = document.getElementById("goal-date-countdown");
-    const raw = localStorage.getItem(goalDateKey());
-
-    if (!el) return;
-    if (!raw) {
-      el.textContent = "目標日を設定してください";
-      return;
-    }
-
-    const today = new Date();
-    const target = new Date(raw + "T00:00:00");
-    const diffMs = target.getTime() - new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
-    const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
-
-    if (diffDays > 0) {
-      el.textContent = "目標日まであと" + diffDays + "日";
-    } else if (diffDays === 0) {
-      el.textContent = "目標日は今日です";
-    } else {
-      el.textContent = "目標日を" + Math.abs(diffDays) + "日過ぎています";
-    }
-  }
-
-  function saveGoalDate() {
-    const input = document.getElementById("goal-date-input");
-    if (!input || !input.value) {
-      alert("目標日を選択してください");
-      return;
-    }
-    localStorage.setItem(goalDateKey(), input.value);
-    updateGoalDateCountdown();
-  }
-
-  function renderGoalItems() {
-    const container = document.getElementById("goal-items-container");
-    if (!container) return;
-
-    const items = getGoalItems();
-    container.innerHTML = "";
-
-    if (items.length === 0) {
-      const empty = document.createElement("p");
-      empty.style.margin = "0";
-      empty.style.color = "#6e7fa8";
-      empty.textContent = "目標を追加してください";
-      container.appendChild(empty);
-      return;
-    }
-
-    items.forEach((item, index) => {
-      const row = document.createElement("div");
-      row.className = "goal-item-row";
-
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.className = "goal-item-checkbox";
-      checkbox.checked = !!item.done;
-      checkbox.onchange = () => toggleGoalDone(index, checkbox.checked);
-
-      const text = document.createElement("input");
-      text.type = "text";
-      text.className = "goal-item-text" + (item.done ? " done" : "");
-      text.value = item.text || "";
-      text.onchange = () => updateGoalText(index, text.value);
-
-      const del = document.createElement("button");
-      del.type = "button";
-      del.className = "goal-item-delete";
-      del.textContent = "削除";
-      del.onclick = () => deleteGoalItem(index);
-
-      row.appendChild(checkbox);
-      row.appendChild(text);
-      row.appendChild(del);
-      container.appendChild(row);
-    });
-  }
-
-  function addGoalItem() {
-    const input = document.getElementById("goal-item-input");
-    if (!input) return;
-
-    const value = input.value.trim();
-    if (!value) return;
-
-    const items = getGoalItems();
-    items.push({ text: value, done: false });
-    setGoalItems(items);
-
-    input.value = "";
-    renderGoalItems();
-  }
-
-  function toggleGoalDone(index, done) {
-    const items = getGoalItems();
-    if (!items[index]) return;
-    items[index].done = done;
-    setGoalItems(items);
-    renderGoalItems();
-  }
-
-  function updateGoalText(index, text) {
-    const items = getGoalItems();
-    if (!items[index]) return;
-    items[index].text = text.trim();
-    setGoalItems(items);
-  }
-
-  function deleteGoalItem(index) {
-    const items = getGoalItems();
-    items.splice(index, 1);
-    setGoalItems(items);
-    renderGoalItems();
-  }
-
-  window.saveGoalDate = saveGoalDate;
-  window.addGoalItem = addGoalItem;
-  window.refreshGoalView = () => {
-    const dateInput = document.getElementById("goal-date-input");
-    const savedDate = localStorage.getItem(goalDateKey());
-    if (dateInput) dateInput.value = savedDate || "";
-    updateGoalDateCountdown();
-    renderGoalItems();
-  };
-
-  const _originalOnload = window.onload;
-  window.onload = () => {
-    if (typeof _originalOnload === "function") _originalOnload();
-    window.refreshGoalView();
-  };
 </script>
     <script>
     // 管理人さん(sw.js)を登録するコード
