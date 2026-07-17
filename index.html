@@ -927,7 +927,7 @@ function openTab(evt, tabId, updateHash = true) {
   }
 }
 
-function activateTabFromHash() {
+function activateTabFromHash(resetScroll = false) {
   const requested = (window.location.hash || "#home").slice(1);
   const tabId = TAB_IDS.includes(requested) ? requested : "home";
   const tabButton = document.querySelector('.tab-link[data-tab="' + tabId + '"]');
@@ -942,13 +942,19 @@ function activateTabFromHash() {
   if (window.location.hash !== normalizedHash) {
     window.history.replaceState(null, "", normalizedHash);
   }
+
+  if (resetScroll) {
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    });
+  }
 }
 
-window.addEventListener('hashchange', activateTabFromHash);
-window.addEventListener('DOMContentLoaded', activateTabFromHash);
+window.addEventListener('hashchange', () => activateTabFromHash(true));
+window.addEventListener('DOMContentLoaded', () => activateTabFromHash(true));
 
 window.onload = () => {
-    activateTabFromHash();
+    activateTabFromHash(true);
     setInterval(() => {
         const now = new Date();
     const target = new Date(now.getFullYear(), 10, 8);
