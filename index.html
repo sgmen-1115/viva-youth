@@ -947,7 +947,15 @@ function activateTabFromHash(resetScroll = false) {
 
   if (resetScroll) {
     requestAnimationFrame(() => {
-      window.scrollTo({ top: INITIAL_SCROLL_OFFSET, left: 0, behavior: "auto" });
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      const nextTop = isMobile ? 0 : INITIAL_SCROLL_OFFSET;
+      window.scrollTo({ top: nextTop, left: 0, behavior: "auto" });
+
+      if (isMobile) {
+        setTimeout(() => {
+          window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+        }, 120);
+      }
     });
   }
 }
