@@ -909,16 +909,45 @@ if (noticeList) {
 </script>
 
 <script>
-   function openTab(evt, tabId) {
+const TAB_IDS = ["home", "mine", "viva-day"];
+
+function openTab(evt, tabId, updateHash = true) {
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.tab-link, .tab-btn').forEach(el => el.classList.remove('active'));
 
   const target = document.getElementById(tabId);
   if (target) target.classList.add('active');
   if (evt && evt.currentTarget) evt.currentTarget.classList.add('active');
+
+  if (updateHash && TAB_IDS.includes(tabId)) {
+    const nextHash = "#" + tabId;
+    if (window.location.hash !== nextHash) {
+      window.history.replaceState(null, "", nextHash);
+    }
+  }
 }
 
+function activateTabFromHash() {
+  const requested = (window.location.hash || "#home").slice(1);
+  const tabId = TAB_IDS.includes(requested) ? requested : "home";
+  const tabButton = document.querySelector('.tab-link[onclick*="\'' + tabId + '\'"]');
+
+  if (tabButton) {
+    openTab({ currentTarget: tabButton }, tabId, false);
+  } else {
+    openTab(null, tabId, false);
+  }
+
+  const normalizedHash = "#" + tabId;
+  if (window.location.hash !== normalizedHash) {
+    window.history.replaceState(null, "", normalizedHash);
+  }
+}
+
+window.addEventListener('hashchange', activateTabFromHash);
+
 window.onload = () => {
+    activateTabFromHash();
     setInterval(() => {
         const now = new Date();
     const target = new Date(now.getFullYear(), 10, 8);
