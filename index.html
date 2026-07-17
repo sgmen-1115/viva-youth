@@ -919,7 +919,7 @@ font-size: 0.8rem;
         </div>
       </div>
 
-      <div class="sub-title">注目動画</div>
+      <div class="sub-title">PR動画</div>
       <div class="video-container">
         <button type="button" class="video-thumb-button" onclick="loadFeaturedVideo(this)" aria-label="注目動画を再生">
           <img src="https://i.ytimg.com/vi/fAPbSXblFFw/maxresdefault.jpg" alt="注目動画サムネイル" loading="lazy">
@@ -1044,12 +1044,6 @@ if (noticeList) {
       const row = document.createElement("div");
       row.className = "notice-item";
 
-      const meta = document.createElement("div");
-      meta.className = "notice-meta";
-      meta.innerHTML =
-        "<span>" + (item.author || "運営") + "</span>" +
-        "<span>" + formatNoticeTime(item.createdAt) + "</span>";
-
       const text = document.createElement("div");
       text.className = "notice-text";
       if ((item.text || "").includes("ユースイベント「ビバ！葛飾！」")) {
@@ -1071,8 +1065,6 @@ if (noticeList) {
       } else {
         text.textContent = item.text || "";
       }
-
-      row.appendChild(meta);
       row.appendChild(text);
       noticeList.appendChild(row);
     });
