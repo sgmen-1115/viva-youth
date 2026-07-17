@@ -36,6 +36,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --primary-color: #8d6a17;
@@ -160,6 +161,12 @@ body::after {
   font-size: 0.95rem;
   line-height: 1.1;
   padding: 8px 10px;
+  text-align: center;
+}
+
+.tab-menu .tab-link.long-label {
+  font-size: 0.8rem;
+  line-height: 1.2;
 }
 
 /* アクティブ */
@@ -168,6 +175,10 @@ body::after {
   background: rgba(247, 208, 118, 0.84);
   color: #5b430f;
   border-color: rgba(141, 107, 21, 0.50);
+}
+
+.tab-menu .tab-link.long-label.active {
+  background: rgba(247, 208, 118, 0.84);
 }
 
 /* スマホ：5つを1画面に収める */
@@ -194,6 +205,11 @@ body::after {
     white-space: normal;
     word-break: keep-all;
     text-align: center;
+  }
+
+  .tab-menu .tab-link.long-label {
+    font-size: 11px;
+    line-height: 1.15;
   }
 }
 
@@ -476,6 +492,8 @@ body::after {
   border: none;
   cursor: pointer;
   width: 100%;
+  box-sizing: border-box;
+  max-width: 100%;
 }
 .goal-textarea {
   width: 100%;
@@ -599,6 +617,47 @@ body::after {
   padding: 18px 16px;
 }
 
+#viva-day .card,
+#viva-day .sub-title,
+#viva-day p {
+  font-family: "M PLUS Rounded 1c", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
+}
+
+#viva-day .card {
+  background: linear-gradient(180deg, rgba(255, 250, 228, 0.95), rgba(255, 242, 202, 0.92));
+}
+
+#viva-day .sub-title {
+  background: linear-gradient(90deg, #d48a2a, #f2b350);
+}
+
+.detail-copy {
+  white-space: pre-line;
+  line-height: 1.85;
+  font-size: 0.98rem;
+  margin: 0;
+}
+
+.detail-callout {
+  margin: 12px 0 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(141, 106, 23, 0.08);
+  border: 1px solid rgba(141, 106, 23, 0.14);
+  line-height: 1.7;
+}
+
+.detail-badge {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(141, 106, 23, 0.9);
+  color: #fffdf4;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
 .schedule-form-grid {
 display: grid;
 gap: 8px;
@@ -665,7 +724,8 @@ font-size: 0.8rem;
 
 <div class="tab-menu">
   <button class="tab-link active" onclick="openTab(event, 'home')">ホーム</button>
-  <button class="tab-link" onclick="openTab(event, 'mine')">写真投稿</button>
+  <button class="tab-link long-label" onclick="openTab(event, 'mine')">企画「わたしの功徳展」<br>写真投稿ページ</button>
+  <button class="tab-link long-label" onclick="openTab(event, 'viva-day')">「ビバ！葛飾！当日について」</button>
 </div>
 
  <div id="home" class="tab-content active">
@@ -707,13 +767,29 @@ font-size: 0.8rem;
 
 <div id="mine" class="tab-content">
 
-<div class="sub-title">写真投稿</div>
+<div class="sub-title">企画「わたしの功徳展」<br>写真投稿ページ</div>
 <div class="card">
   <div class="action-link-stack">
     <a class="oumi-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeacmsaopLvf0KmPsQJ_GnsJ97kK21085jussnSbs6ANRKh1Q/viewform" target="_blank" rel="noopener noreferrer">投稿フォーム</a>
     <a class="oumi-btn" href="mailto:viva.katsushika@gmail.com?subject=%E3%83%93%E3%83%90%E3%81%8B%E3%81%A4%EF%BC%9A%E5%8A%9F%E5%BE%B3%E5%B1%95%E6%8A%95%E7%A8%BF&body=%E6%9C%AC%E3%83%A1%E3%83%BC%E3%83%AB%E3%81%AB%E5%8A%9F%E5%BE%B3%E5%B1%95%E3%81%A7%E6%8E%B2%E8%BC%89%E3%81%99%E3%82%8B%E7%B4%A0%E6%9D%90%EF%BC%88%E5%8B%95%E7%94%BB%EF%BC%89%E3%81%AA%E3%81%A9%E3%82%92%E6%B7%BB%E4%BB%98%E3%81%AE%E4%B8%8A%E3%80%81%E6%9C%AC%E6%96%87%E3%81%AB%E3%82%A8%E3%83%94%E3%82%BD%E3%83%BC%E3%83%89%EF%BC%88%E5%8A%9F%E5%BE%B3%E3%81%AE%E5%86%85%E5%AE%B9%EF%BC%89%E3%82%92%E8%A8%98%E8%BC%89%E3%81%97%E3%81%A6%E9%80%81%E4%BF%A1%E3%81%97%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84%E3%80%82">Googleアカウントがない方へ</a>
   </div>
 </div>
+</div>
+
+<div id="viva-day" class="tab-content">
+  <div class="sub-title">「ビバ！葛飾！当日について」</div>
+  <div class="card">
+    <div class="detail-badge">当日のご案内</div>
+    <p class="detail-copy">イベントは２部制！
+第１部では、代表の信仰体験を新たな形で紹介する会合を開催。
+続く、第２部では、ブース企画を行い、展示や参加者どうしの対話など、信仰の素晴らしさを「見て、聞いて、話せる」内容になっています。
+他にもスマホ撮影が学べるコーナーやお子さんが遊べる「ワクワクランド」も用意しています。
+
+目玉企画は「わたしの功徳展」です。今月末にユース世代に写真応募フォームで投稿された「自分なりの功徳」のエピソードと写真、動画などを展示します。
+信仰の力を若者目線で伝える広布拡大企画です。
+葛飾中に功徳が広がっている様子をお伝えしていく思いも込めています。</p>
+    <div class="detail-callout">このページは、当日の雰囲気や見どころをわかりやすくまとめた案内です。</div>
+  </div>
 </div>
 
 <script type="module">
