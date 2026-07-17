@@ -778,8 +778,8 @@ font-size: 0.8rem;
 </div>
 
 <div class="tab-menu">
-  <button class="tab-link active" onclick="openTab(event, 'home')">ホーム</button>
-  <button class="tab-link long-label" onclick="openTab(event, 'mine')">企画「わたしの功徳展」<br>写真投稿ページ</button>
+  <button class="tab-link active" data-tab="home" onclick="openTab(event, 'home')">ホーム</button>
+  <button class="tab-link long-label" data-tab="mine" onclick="openTab(event, 'mine')">企画「わたしの功徳展」<br>写真投稿ページ</button>
 </div>
 
 <div id="home" class="tab-content active">
@@ -930,7 +930,7 @@ function openTab(evt, tabId, updateHash = true) {
 function activateTabFromHash() {
   const requested = (window.location.hash || "#home").slice(1);
   const tabId = TAB_IDS.includes(requested) ? requested : "home";
-  const tabButton = document.querySelector('.tab-link[onclick*="\'' + tabId + '\'"]');
+  const tabButton = document.querySelector('.tab-link[data-tab="' + tabId + '"]');
 
   if (tabButton) {
     openTab({ currentTarget: tabButton }, tabId, false);
@@ -945,6 +945,7 @@ function activateTabFromHash() {
 }
 
 window.addEventListener('hashchange', activateTabFromHash);
+window.addEventListener('DOMContentLoaded', activateTabFromHash);
 
 window.onload = () => {
     activateTabFromHash();
