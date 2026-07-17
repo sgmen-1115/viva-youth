@@ -590,6 +590,12 @@ body::after {
   border-radius: 10px;
   padding: 10px 12px;
 }
+.notice-item-clickable {
+  cursor: pointer;
+}
+.notice-item-clickable:hover {
+  background: rgba(255, 248, 220, 0.18);
+}
 .notice-meta {
   display: flex;
   justify-content: space-between;
@@ -600,6 +606,22 @@ body::after {
   line-height: 1.45;
   word-break: break-word;
   white-space: pre-line;
+}
+.notice-detail-link {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #fff7b8;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.notice-detail-link:focus-visible {
+  outline: 2px solid rgba(255, 247, 184, 0.9);
+  outline-offset: 2px;
 }
 .notice-empty {
   margin: 0;
@@ -725,7 +747,6 @@ font-size: 0.8rem;
 <div class="tab-menu">
   <button class="tab-link active" onclick="openTab(event, 'home')">ホーム</button>
   <button class="tab-link long-label" onclick="openTab(event, 'mine')">企画「わたしの功徳展」<br>写真投稿ページ</button>
-  <button class="tab-link long-label" onclick="openTab(event, 'viva-day')">「ビバ！葛飾！当日について」</button>
 </div>
 
  <div id="home" class="tab-content active">
@@ -797,8 +818,8 @@ const noticeList = document.getElementById("notice-list");
 const fixedNotices = [
   {
     author: "運営",
-    text: "③ユースイベント「ビバ！葛飾！」\n日時：11月8日（日）\n※11 時（亀有・立石・戸田）、14 時（高砂・水元）\n場所：葛飾平和講堂",
-    createdAt: new Date("2026-11-08T09:00:00+09:00").getTime(),
+    text: "①第1回「ビバ活」\n日時：9月13日（日）\n場所：青年幹視聴後、各会館にて",
+    createdAt: new Date("2026-09-13T09:00:00+09:00").getTime(),
   },
   {
     author: "運営",
@@ -807,8 +828,8 @@ const fixedNotices = [
   },
   {
     author: "運営",
-    text: "①第1回「ビバ活」\n日時：9月13日（日）\n場所：青年幹視聴後、各会館にて",
-    createdAt: new Date("2026-09-13T09:00:00+09:00").getTime(),
+    text: "③ユースイベント「ビバ！葛飾！」\n日時：11月8日（日）\n※11 時（亀有・立石・戸田）、14 時（高砂・水元）\n場所：葛飾平和講堂",
+    createdAt: new Date("2026-11-08T09:00:00+09:00").getTime(),
   },
 ];
 
@@ -823,7 +844,7 @@ function formatNoticeTime(ts) {
 }
 
 if (noticeList) {
-  const items = [...fixedNotices].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+  const items = [...fixedNotices].sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
   noticeList.innerHTML = "";
   if (!items.length) {
     noticeList.innerHTML = '<p class="notice-empty">現在お知らせはありません。</p>';
@@ -840,7 +861,25 @@ if (noticeList) {
 
       const text = document.createElement("div");
       text.className = "notice-text";
-      text.textContent = item.text || "";
+      if ((item.text || "").includes("③ユースイベント「ビバ！葛飾！」")) {
+        const detailLink = document.createElement("button");
+        detailLink.type = "button";
+        detailLink.className = "notice-detail-link";
+        detailLink.textContent = "詳細はこちら≫";
+        detailLink.onclick = (ev) => openTab(ev, 'viva-day');
+
+        const lines = (item.text || "").split("\n");
+        text.textContent = lines.join("\n");
+        text.appendChild(document.createElement("br"));
+        text.appendChild(detailLink);
+        row.classList.add("notice-item-clickable");
+        row.onclick = (ev) => {
+          if (ev.target && ev.target.closest && ev.target.closest(".notice-detail-link")) return;
+          openTab(ev, 'viva-day');
+        };
+      } else {
+        text.textContent = item.text || "";
+      }
 
       row.appendChild(meta);
       row.appendChild(text);
