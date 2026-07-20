@@ -193,6 +193,7 @@ body::after {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  mix-blend-mode: multiply;
 }
 
 .nav-label {
@@ -1167,21 +1168,21 @@ font-size: 0.8rem;
 <nav class="bottom-nav" aria-label="メインナビゲーション">
   <button class="nav-item active" type="button" data-tab="home">
     <div class="nav-icon">
-      <img src="./ico_home.jpeg" alt="" class="nav-icon-image">
+      <img src="./icon_home.png" alt="" class="nav-icon-image">
     </div>
     <span class="nav-label">ホーム</span>
     <div class="nav-indicator"></div>
   </button>
   <button class="nav-item" type="button" data-tab="mine">
     <div class="nav-icon">
-      <img src="./icon_form.jpeg" alt="" class="nav-icon-image">
+      <img src="./icon_form.png" alt="" class="nav-icon-image">
     </div>
     <span class="nav-label">写真投稿</span>
     <div class="nav-indicator"></div>
   </button>
   <button class="nav-item" type="button" data-external-url="https://script.google.com/macros/s/AKfycbxZy3UYcW3lQ4MgzlfHbBu8X92B12k6PecGPKub7aeaj6Xqslkt_AEJPoUdH_TfzRl-EQ/exec">
     <div class="nav-icon">
-      <img src="./icon_time.jpeg" alt="" class="nav-icon-image">
+      <img src="./icon_time.png" alt="" class="nav-icon-image">
     </div>
     <span class="nav-label nav-label-wide">Believe<br>(唱題ツール)</span>
     <div class="nav-indicator"></div>
@@ -1214,28 +1215,6 @@ font-size: 0.8rem;
         </button>
       </div>
 
-      <h2 class="section-title">よくある質問</h2>
-      <button type="button" class="link-card" onclick="openTab(event, 'qa')" aria-label="Q&Aページを開く">
-        <div class="link-header">
-          <div class="link-icon" style="color: #ffffff;">
-            <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="12" cy="12" r="9"></circle>
-              <path d="M9.4 9.2a2.8 2.8 0 0 1 5.2 1.3c0 1.9-2.6 2.6-2.6 2.6"></path>
-              <line x1="12" y1="16.8" x2="12.01" y2="16.8"></line>
-            </svg>
-          </div>
-          <div class="link-info">
-            <div class="link-name">Q&amp;A</div>
-            <div class="link-desc">ユースアクションフェスについて、よくいただくご質問をまとめています。</div>
-          </div>
-        </div>
-        <span class="link-cta">
-          質問を見る
-          <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </span>
-      </button>
     </div>
   </div>
 </div>
@@ -1248,6 +1227,29 @@ font-size: 0.8rem;
     <a class="mail-text-link" href="#mail-guide">Googleアカウントがない方へ≫</a>
   </div>
 </div>
+
+<h2 class="section-title">よくある質問</h2>
+<button type="button" class="link-card" onclick="openTab(event, 'qa')" aria-label="Q&Aページを開く">
+  <div class="link-header">
+    <div class="link-icon" style="color: #ffffff;">
+      <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="9"></circle>
+        <path d="M9.4 9.2a2.8 2.8 0 0 1 5.2 1.3c0 1.9-2.6 2.6-2.6 2.6"></path>
+        <line x1="12" y1="16.8" x2="12.01" y2="16.8"></line>
+      </svg>
+    </div>
+    <div class="link-info">
+      <div class="link-name">Q&amp;A</div>
+      <div class="link-desc">写真投稿について、よくいただくご質問をまとめています。</div>
+    </div>
+  </div>
+  <span class="link-cta">
+    質問を見る
+    <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </span>
+</button>
 </div>
 
 <div id="mail-guide" class="tab-content">
@@ -1325,43 +1327,31 @@ font-size: 0.8rem;
     <div class="qa-list">
       <details class="qa-item" open>
         <summary>
-          <span class="qa-question">このサイトでできることは？</span>
+          <span class="qa-question">画像サイズにしてはありますか？</span>
           <span class="qa-chevron" aria-hidden="true">›</span>
         </summary>
         <div class="qa-body">
-          <p>イベントのお知らせ、PR動画、写真投稿フォーム、当日の案内などをまとめて確認できます。</p>
-          <p>必要なページへすぐ移動できるよう、ホーム画面から各導線を整理しています。</p>
+          <p>ありませんが、サイズが大きすぎると送信できない可能性がありますので、その場合は、メールにてご相談ください。</p>
         </div>
       </details>
 
       <details class="qa-item">
         <summary>
-          <span class="qa-question">「わたしの功徳展」には何を投稿できますか？</span>
+          <span class="qa-question">親のスマホから、子どもの投稿をしてもよいのか。</span>
           <span class="qa-chevron" aria-hidden="true">›</span>
         </summary>
         <div class="qa-body">
-          <p>ご自身の功徳だと感じたエピソードと、それにまつわる写真や動画を投稿できます。</p>
-          <p>Googleフォーム、または案内に沿ったメール投稿をご利用ください。</p>
+          <p>問題ございません。</p>
         </div>
       </details>
 
       <details class="qa-item">
         <summary>
-          <span class="qa-question">Googleアカウントがなくても投稿できますか？</span>
+          <span class="qa-question">何度も投稿してもよいのか</span>
           <span class="qa-chevron" aria-hidden="true">›</span>
         </summary>
         <div class="qa-body">
-          <p>できます。写真投稿ページ内の「Googleアカウントがない方へ」から、メール投稿の案内をご確認ください。</p>
-        </div>
-      </details>
-
-      <details class="qa-item">
-        <summary>
-          <span class="qa-question">Believe(唱題ツール)はどこから開けますか？</span>
-          <span class="qa-chevron" aria-hidden="true">›</span>
-        </summary>
-        <div class="qa-body">
-          <p>画面下部のボトムナビにある「Believe(唱題ツール)」から直接アクセスできます。</p>
+          <p>申し訳ございません</p>
         </div>
       </details>
 
@@ -1450,7 +1440,7 @@ const NAV_ACTIVE_MAP = {
   mine: "mine",
   "mail-guide": "mine",
   "viva-day": "home",
-  qa: "home",
+  qa: "mine",
 };
 const INITIAL_SCROLL_OFFSET = 0;
 const FEATURED_VIDEO_ID = "fAPbSXblFFw";
