@@ -43,7 +43,7 @@
   --accent-color: #f2c55f;
   --white: #ffffff;
   --header-h: 56px;
-  --tab-h: 64px;
+  --bottom-nav-h: 92px;
   --ui-glass: rgba(255, 250, 228, 0.94);
   --text-blue: #5f4917;
 
@@ -54,6 +54,7 @@
 body {
   margin: 0;
   padding-top: var(--header-h);
+  padding-bottom: calc(var(--bottom-nav-h) + 18px);
   color: var(--text-blue);
   font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
   background: linear-gradient(180deg, #fff7cf 0%, #ffedb0 48%, #f6de92 100%);
@@ -130,92 +131,135 @@ body::after {
   }
 }    
 
-/* タブ */
-.tab-menu {
-  position: sticky;
-  top: var(--header-h);
-  z-index: 2500;
-  height: var(--tab-h);
+/* ボトムナビ */
+.bottom-nav {
+  position: fixed;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  z-index: 3500;
+  width: min(720px, calc(100% - 20px));
+  min-height: var(--bottom-nav-h);
   box-sizing: border-box;
-  margin: 0 auto;
-  padding: 10px 12px;
+  padding: 10px 12px max(10px, env(safe-area-inset-bottom));
   display: flex;
   align-items: center;
   gap: 10px;
-  width: min(1440px, calc(100% - 24px));
-  background: rgba(179, 145, 48, 0.24);
-  backdrop-filter: blur(8px);
-  border-radius: 0 0 22px 22px;
+  background: rgba(253, 250, 242, 0.94);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(168, 129, 30, 0.12);
+  border-radius: 28px;
+  box-shadow: 0 16px 40px rgba(109, 82, 23, 0.18);
 }
 
-.tab-menu .tab-link,
-.tab-menu .tab-btn {
+.nav-item {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   flex: 1 1 0;
   min-width: 0;
-  min-height: 42px;
-  border-radius: 999px;
-  border: 1px solid rgba(140, 106, 22, 0.30);
-  background: rgba(255, 252, 236, 0.62);
-  color: rgba(94, 69, 16, 0.95);
-  font-weight: 700;
-  font-size: 0.95rem;
-  line-height: 1.1;
-  padding: 8px 10px;
+  min-height: 68px;
+  gap: 6px;
+  border: none;
+  background: transparent;
+  color: rgba(94, 69, 16, 0.7);
+  font: inherit;
   text-align: center;
   text-decoration: none;
   box-sizing: border-box;
   cursor: pointer;
+  position: relative;
+  padding: 4px 6px 10px;
 }
 
-.tab-menu .tab-link.long-label {
-  font-size: 0.8rem;
-  line-height: 1.2;
+.nav-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: rgba(255, 245, 215, 0.92);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 6px 14px rgba(141, 106, 23, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
-/* アクティブ */
-.tab-menu .tab-link.active,
-.tab-menu .tab-btn.active {
-  background: rgba(247, 208, 118, 0.84);
-  color: #5b430f;
-  border-color: rgba(141, 107, 21, 0.50);
+.nav-icon-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.tab-menu .tab-link.long-label.active {
-  background: rgba(247, 208, 118, 0.84);
+.nav-label {
+  font-size: 0.74rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
 }
 
-/* スマホ：5つを1画面に収める */
+.nav-label-wide {
+  white-space: normal;
+}
+
+.nav-indicator {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 26px;
+  height: 4px;
+  border-radius: 999px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, #d89a1d, #f0cb6a);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.nav-item.active {
+  color: #b76b0f;
+}
+
+.nav-item.active .nav-icon {
+  background: linear-gradient(180deg, rgba(247, 216, 136, 0.96), rgba(242, 194, 81, 0.96));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 10px 18px rgba(194, 136, 23, 0.26);
+}
+
+.nav-item.active .nav-indicator {
+  opacity: 1;
+}
+
 @media (max-width: 768px) {
-  .tab-menu {
-    width: 100%;
-    padding: 8px 8px;
-    gap: 6px;
-    border-radius: 0;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: stretch;
-    overflow: hidden; /* ← 横スクロール禁止 */
-    height: auto;
+  :root {
+    --bottom-nav-h: 86px;
   }
 
-  .tab-menu .tab-link,
-  .tab-menu .tab-btn {
-    width: 100%;
-    min-width: 0;
-    min-height: 40px;
-    font-size: 12px;
-    padding: 7px 4px;
-    white-space: normal;
-    word-break: keep-all;
-    text-align: center;
+  body {
+    padding-bottom: calc(var(--bottom-nav-h) + 14px);
   }
 
-  .tab-menu .tab-link.long-label {
-    font-size: 11px;
-    line-height: 1.15;
+  .bottom-nav {
+    width: calc(100% - 12px);
+    bottom: 6px;
+    padding: 8px 8px max(8px, env(safe-area-inset-bottom));
+    gap: 4px;
+    border-radius: 24px;
+  }
+
+  .nav-item {
+    min-height: 64px;
+    gap: 5px;
+    padding: 4px 4px 8px;
+  }
+
+  .nav-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+  }
+
+  .nav-label {
+    font-size: 0.68rem;
   }
 }
 
@@ -226,7 +270,7 @@ body::after {
   padding: 20px 16px 40px;
   color: var(--text-blue);
   background: transparent;
-  min-height: calc(100vh - (var(--header-h) + var(--tab-h)));
+  min-height: calc(100vh - var(--header-h) - var(--bottom-nav-h));
 }
 .tab-content.active {
   display: block;
@@ -265,7 +309,7 @@ body::after {
 /* ヒーロー背景（画像ベース） */
 .page-visual {
   position: relative;
-  min-height: calc(100vh - (var(--header-h) + var(--tab-h)));
+  min-height: calc(100vh - var(--header-h) - var(--bottom-nav-h));
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -902,11 +946,29 @@ font-size: 0.8rem;
   <h1>葛飾総区ユースアクションフェス</h1>
 </div>
 
-<div class="tab-menu">
-  <button class="tab-link active" data-tab="home" onclick="openTab(event, 'home')">ホーム</button>
-  <button class="tab-link long-label" data-tab="mine" onclick="openTab(event, 'mine')">企画「わたしの功徳展」<br>写真投稿ページ</button>
-  <a class="tab-link" href="https://script.google.com/macros/s/AKfycbxZy3UYcW3lQ4MgzlfHbBu8X92B12k6PecGPKub7aeaj6Xqslkt_AEJPoUdH_TfzRl-EQ/exec">Believe(唱題ツール)</a>
-</div>
+<nav class="bottom-nav" aria-label="メインナビゲーション">
+  <button class="nav-item active" type="button" data-tab="home">
+    <div class="nav-icon">
+      <img src="./icon_home.jpeg" alt="" class="nav-icon-image">
+    </div>
+    <span class="nav-label">ホーム</span>
+    <div class="nav-indicator"></div>
+  </button>
+  <button class="nav-item" type="button" data-tab="mine">
+    <div class="nav-icon">
+      <img src="./icon_form.jpeg" alt="" class="nav-icon-image">
+    </div>
+    <span class="nav-label">写真投稿</span>
+    <div class="nav-indicator"></div>
+  </button>
+  <button class="nav-item" type="button" data-external-url="https://script.google.com/macros/s/AKfycbxZy3UYcW3lQ4MgzlfHbBu8X92B12k6PecGPKub7aeaj6Xqslkt_AEJPoUdH_TfzRl-EQ/exec">
+    <div class="nav-icon">
+      <img src="./icon_time.jpeg" alt="" class="nav-icon-image">
+    </div>
+    <span class="nav-label nav-label-wide">Believe<br>(唱題ツール)</span>
+    <div class="nav-indicator"></div>
+  </button>
+</nav>
 
 <div id="home" class="tab-content active">
   <div class="page-visual">
@@ -1081,8 +1143,21 @@ if (noticeList) {
 
 <script>
 const TAB_IDS = ["home", "mine", "mail-guide", "viva-day"];
+const NAV_ACTIVE_MAP = {
+  home: "home",
+  mine: "mine",
+  "mail-guide": "mine",
+  "viva-day": "home",
+};
 const INITIAL_SCROLL_OFFSET = 0;
 const FEATURED_VIDEO_ID = "fAPbSXblFFw";
+
+function setActiveNav(tabId) {
+  const activeNavId = NAV_ACTIVE_MAP[tabId] || "home";
+  document.querySelectorAll('.nav-item').forEach((el) => el.classList.remove('active'));
+  const activeNav = document.querySelector('.nav-item[data-tab="' + activeNavId + '"]');
+  if (activeNav) activeNav.classList.add('active');
+}
 
 function loadFeaturedVideo(trigger) {
   const container = trigger && trigger.closest ? trigger.closest('.video-container') : null;
@@ -1093,11 +1168,10 @@ function loadFeaturedVideo(trigger) {
 
 function openTab(evt, tabId, updateHash = true) {
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('.tab-link, .tab-btn').forEach(el => el.classList.remove('active'));
 
   const target = document.getElementById(tabId);
   if (target) target.classList.add('active');
-  if (evt && evt.currentTarget) evt.currentTarget.classList.add('active');
+  setActiveNav(tabId);
 
   if (updateHash && TAB_IDS.includes(tabId)) {
     const nextHash = "#" + tabId;
@@ -1107,10 +1181,25 @@ function openTab(evt, tabId, updateHash = true) {
   }
 }
 
+document.querySelectorAll('.nav-item').forEach((item) => {
+  item.addEventListener('click', () => {
+    const externalUrl = item.dataset.externalUrl;
+    if (externalUrl) {
+      window.location.href = externalUrl;
+      return;
+    }
+
+    const tabId = item.dataset.tab;
+    if (tabId) {
+      openTab({ currentTarget: item }, tabId);
+    }
+  });
+});
+
 function activateTabFromHash(resetScroll = false) {
   const requested = (window.location.hash || "#home").slice(1);
   const tabId = TAB_IDS.includes(requested) ? requested : "home";
-  const tabButton = document.querySelector('.tab-link[data-tab="' + tabId + '"]');
+  const tabButton = document.querySelector('.nav-item[data-tab="' + tabId + '"]');
 
   if (tabButton) {
     openTab({ currentTarget: tabButton }, tabId, false);
