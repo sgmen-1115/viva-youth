@@ -150,6 +150,9 @@ body::after {
 
 .tab-menu .tab-link,
 .tab-menu .tab-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex: 1 1 0;
   min-width: 0;
   min-height: 42px;
@@ -162,6 +165,9 @@ body::after {
   line-height: 1.1;
   padding: 8px 10px;
   text-align: center;
+  text-decoration: none;
+  box-sizing: border-box;
+  cursor: pointer;
 }
 
 .tab-menu .tab-link.long-label {
@@ -899,6 +905,7 @@ font-size: 0.8rem;
 <div class="tab-menu">
   <button class="tab-link active" data-tab="home" onclick="openTab(event, 'home')">ホーム</button>
   <button class="tab-link long-label" data-tab="mine" onclick="openTab(event, 'mine')">企画「わたしの功徳展」<br>写真投稿ページ</button>
+  <a class="tab-link" href="https://script.google.com/macros/s/AKfycbxZy3UYcW3lQ4MgzlfHbBu8X92B12k6PecGPKub7aeaj6Xqslkt_AEJPoUdH_TfzRl-EQ/exec">Believe(唱題ツール)</a>
 </div>
 
 <div id="home" class="tab-content active">
