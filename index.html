@@ -171,14 +171,18 @@ body::after {
   cursor: pointer;
   position: relative;
   padding: 4px 6px 10px;
+  border-radius: 20px;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .nav-icon {
   width: 42px;
   height: 42px;
   border-radius: 14px;
-  background: rgba(255, 245, 215, 0.92);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 6px 14px rgba(141, 106, 23, 0.12);
+  padding: 3px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(247, 232, 193, 0.32));
+  border: 1px solid rgba(183, 145, 56, 0.14);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.62), 0 4px 12px rgba(141, 106, 23, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -188,6 +192,7 @@ body::after {
 .nav-icon-image {
   width: 100%;
   height: 100%;
+  border-radius: 11px;
   object-fit: cover;
 }
 
@@ -218,11 +223,13 @@ body::after {
 
 .nav-item.active {
   color: #b76b0f;
+  background: linear-gradient(180deg, rgba(255, 245, 214, 0.9), rgba(248, 236, 203, 0.5));
 }
 
 .nav-item.active .nav-icon {
-  background: linear-gradient(180deg, rgba(247, 216, 136, 0.96), rgba(242, 194, 81, 0.96));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 10px 18px rgba(194, 136, 23, 0.26);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(247, 226, 176, 0.46));
+  border-color: rgba(194, 136, 23, 0.22);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78), 0 8px 16px rgba(194, 136, 23, 0.12);
 }
 
 .nav-item.active .nav-indicator {
@@ -250,6 +257,7 @@ body::after {
     min-height: 64px;
     gap: 5px;
     padding: 4px 4px 8px;
+    border-radius: 16px;
   }
 
   .nav-icon {
@@ -949,7 +957,7 @@ font-size: 0.8rem;
 <nav class="bottom-nav" aria-label="メインナビゲーション">
   <button class="nav-item active" type="button" data-tab="home">
     <div class="nav-icon">
-      <img src="./icon_home.jpeg" alt="" class="nav-icon-image">
+      <img src="./ico_home.jpeg" alt="" class="nav-icon-image">
     </div>
     <span class="nav-label">ホーム</span>
     <div class="nav-indicator"></div>
