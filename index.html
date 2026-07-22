@@ -915,6 +915,41 @@ body::after {
   margin-bottom: 14px;
 }
 
+.mine-banner {
+  margin-bottom: 14px;
+  padding: 18px 16px;
+  border-radius: 20px;
+  background:
+    linear-gradient(135deg, rgba(141, 106, 23, 0.96), rgba(212, 164, 0, 0.92));
+  box-shadow: 0 14px 28px rgba(109, 82, 23, 0.18);
+  border: 1px solid rgba(255, 248, 220, 0.26);
+  color: #fffdf4;
+  text-align: center;
+}
+
+.mine-banner-kicker {
+  margin: 0 0 6px;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  opacity: 0.9;
+}
+
+.mine-banner-title {
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.25;
+  font-weight: 900;
+}
+
+.mine-banner-subtitle {
+  margin: 8px 0 0;
+  font-size: 0.94rem;
+  line-height: 1.7;
+  font-weight: 700;
+  color: rgba(255, 253, 244, 0.92);
+}
+
 .post-form-note {
   margin: 0;
   color: #6b4f0f;
@@ -1179,6 +1214,11 @@ font-size: 0.8rem;
 <div id="mine" class="tab-content">
 <div class="card">
   <div class="action-link-stack">
+    <div class="mine-banner" aria-label="わたしの功徳展ページタイトル">
+      <p class="mine-banner-kicker">わたしの功徳展</p>
+      <h2 class="mine-banner-title">投稿はこちら</h2>
+      <p class="mine-banner-subtitle">エピソードや写真・動画を送って、展示に参加しましょう。</p>
+    </div>
     <p class="post-form-note">「わたしの功徳展」に掲載するエピソードや写真・動画は、こちらの投稿フォームからお送りください。</p>
     <a class="oumi-btn form-highlight-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeacmsaopLvf0KmPsQJ_GnsJ97kK21085jussnSbs6ANRKh1Q/viewform" target="_blank" rel="noopener noreferrer"><span class="form-label">投稿フォーム</span></a>
     <a class="mail-text-link" href="#mail-guide">Googleアカウントがない方へ≫</a>
