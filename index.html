@@ -279,6 +279,35 @@ body::after {
   }
 }
 
+#mine {
+  position: relative;
+  overflow: hidden;
+}
+
+.mine-title-bg {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+  margin: 0;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  color: rgba(107, 79, 15, 0.18);
+  font-family: "Cinzel", "M PLUS Rounded 1c", serif;
+  font-size: clamp(3rem, 8vw, 5.4rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.45);
+}
+
+.mine-card-wrap {
+  position: relative;
+  z-index: 1;
+  margin-top: clamp(70px, 12vw, 120px);
+}
+
 /* ヒーロー背景（画像ベース） */
 .page-visual {
   position: relative;
@@ -1199,15 +1228,15 @@ font-size: 0.8rem;
 </div>
 
 <div id="mine" class="tab-content">
-<div class="mine-banner" aria-label="わたしの功徳展ページタイトル">
-  <h2 class="mine-banner-title">わたしの功徳展</h2>
-</div>
+<h2 class="mine-title-bg" aria-hidden="true">わたしの功徳展</h2>
+<div class="mine-card-wrap">
 <div class="card">
   <div class="action-link-stack">
     <p class="post-form-note">「わたしの功徳展」に掲載するエピソードや写真・動画は、こちらの投稿フォームからお送りください。</p>
     <a class="oumi-btn form-highlight-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeacmsaopLvf0KmPsQJ_GnsJ97kK21085jussnSbs6ANRKh1Q/viewform" target="_blank" rel="noopener noreferrer"><span class="form-label">投稿フォーム</span></a>
     <a class="mail-text-link" href="#mail-guide">Googleアカウントがない方へ≫</a>
   </div>
+</div>
 </div>
 
 <h2 class="section-title">よくある質問</h2>
