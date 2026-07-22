@@ -39,13 +39,13 @@
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --primary-color: #8f949d;
-  --accent-color: #e9edf2;
+  --primary-color: #9f8a74;
+  --accent-color: #d8cabc;
   --white: #ffffff;
   --header-h: 56px;
   --bottom-nav-h: 92px;
-  --ui-glass: rgba(249, 251, 253, 0.95);
-  --text-blue: #4f5866;
+  --ui-glass: rgba(252, 248, 242, 0.95);
+  --text-blue: #5e5348;
 
   /* 背景画像のパス（ここだけ後で変更しやすいよう変数化） */
   --hero-image: none;
@@ -57,7 +57,7 @@ body {
   padding-bottom: calc(var(--bottom-nav-h) + 18px);
   color: var(--text-blue);
   font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
-  background: linear-gradient(180deg, #fdfefe 0%, #f6f8fa 52%, #edf1f5 100%);
+  background: linear-gradient(180deg, #fcfaf7 0%, #f4eee6 52%, #e8ddd0 100%);
   background-attachment: fixed;
   position: relative;
   overflow-x: hidden;
@@ -69,10 +69,10 @@ body::before {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 12% 14%, rgba(221, 228, 238, 0.26) 0 8px, transparent 9px),
-    radial-gradient(circle at 88% 18%, rgba(240, 244, 249, 0.3) 0 7px, transparent 8px),
-    radial-gradient(circle at 20% 80%, rgba(216, 225, 236, 0.24) 0 9px, transparent 10px),
-    radial-gradient(circle at 82% 76%, rgba(210, 220, 232, 0.24) 0 10px, transparent 11px);
+    radial-gradient(circle at 12% 14%, rgba(235, 224, 210, 0.34) 0 8px, transparent 9px),
+    radial-gradient(circle at 88% 18%, rgba(245, 239, 231, 0.34) 0 7px, transparent 8px),
+    radial-gradient(circle at 20% 80%, rgba(231, 218, 202, 0.31) 0 9px, transparent 10px),
+    radial-gradient(circle at 82% 76%, rgba(224, 208, 190, 0.32) 0 10px, transparent 11px);
   opacity: 0.55;
   z-index: 0;
 }
@@ -102,14 +102,14 @@ body::after {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: linear-gradient(180deg, rgba(252, 253, 255, 0.94), rgba(242, 246, 250, 0.96));
+  background: linear-gradient(180deg, rgba(250, 246, 239, 0.94), rgba(238, 230, 219, 0.96));
   backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(121, 134, 152, 0.14);
+  border-top: 1px solid rgba(133, 116, 95, 0.14);
   border-left: none;
   border-right: none;
   border-bottom: none;
   border-radius: 24px 24px 0 0;
-  box-shadow: 0 -8px 28px rgba(70, 84, 102, 0.1);
+  box-shadow: 0 -8px 28px rgba(102, 90, 74, 0.1);
 }
 
 .nav-item {
@@ -123,7 +123,7 @@ body::after {
   gap: 6px;
   border: none;
   background: transparent;
-  color: rgba(79, 92, 110, 0.72);
+  color: rgba(95, 80, 61, 0.7);
   font: inherit;
   text-align: center;
   text-decoration: none;
@@ -173,14 +173,14 @@ body::after {
   height: 4px;
   border-radius: 999px;
   transform: translateX(-50%);
-  background: linear-gradient(90deg, #98a6b8, #d7e0ea);
+  background: linear-gradient(90deg, #b39d84, #d7c7b6);
   opacity: 0;
   transition: opacity 0.18s ease;
 }
 
 .nav-item.active {
-  color: #5a677a;
-  background: linear-gradient(180deg, rgba(245, 249, 253, 0.78), rgba(234, 240, 246, 0.54));
+  color: #7d6a56;
+  background: linear-gradient(180deg, rgba(248, 241, 232, 0.78), rgba(236, 225, 211, 0.54));
 }
 
 .nav-item.active .nav-indicator {
@@ -341,35 +341,35 @@ body::after {
     radial-gradient(
       circle at 10% 20%,
       transparent 0 16vmin,
-      rgba(236, 242, 248, 0.52) 16vmin 22vmin,
+      rgba(241, 232, 220, 0.52) 16vmin 22vmin,
       transparent 22.4vmin
     ),
     radial-gradient(
       circle at 34% 68%,
       transparent 0 20vmin,
-      rgba(228, 236, 245, 0.46) 20vmin 27vmin,
+      rgba(233, 222, 207, 0.46) 20vmin 27vmin,
       transparent 27.4vmin
     ),
     radial-gradient(
       circle at 78% 24%,
       transparent 0 18vmin,
-      rgba(239, 245, 251, 0.5) 18vmin 25vmin,
+      rgba(242, 232, 221, 0.5) 18vmin 25vmin,
       transparent 25.5vmin
     ),
     radial-gradient(
       circle at 86% 78%,
       transparent 0 22vmin,
-      rgba(223, 232, 242, 0.46) 22vmin 29vmin,
+      rgba(228, 214, 195, 0.46) 22vmin 29vmin,
       transparent 29.4vmin
     ),
-    linear-gradient(180deg, #fbfcfe 0%, #f2f6fa 52%, #e8eef4 100%);
+    linear-gradient(180deg, #f9f6f1 0%, #efe6db 52%, #e2d5c6 100%);
 }
 
 #home .page-visual::before {
   background:
     radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.34), transparent 28%),
     radial-gradient(circle at 82% 74%, rgba(255, 255, 255, 0.22), transparent 30%),
-    linear-gradient(145deg, rgba(248, 251, 255, 0.24), rgba(190, 205, 222, 0.12));
+    linear-gradient(145deg, rgba(250, 246, 240, 0.24), rgba(189, 168, 141, 0.12));
 }
 
 @media (max-width: 768px) {
@@ -378,28 +378,28 @@ body::after {
       radial-gradient(
         circle at 8% 16%,
         transparent 0 22vmin,
-        rgba(236, 242, 248, 0.5) 22vmin 28vmin,
+        rgba(241, 232, 220, 0.5) 22vmin 28vmin,
         transparent 28.5vmin
       ),
       radial-gradient(
         circle at 34% 64%,
         transparent 0 24vmin,
-        rgba(228, 236, 245, 0.42) 24vmin 31vmin,
+        rgba(233, 222, 207, 0.42) 24vmin 31vmin,
         transparent 31.4vmin
       ),
       radial-gradient(
         circle at 88% 20%,
         transparent 0 20vmin,
-        rgba(239, 245, 251, 0.46) 20vmin 27vmin,
+        rgba(242, 232, 221, 0.46) 20vmin 27vmin,
         transparent 27.5vmin
       ),
       radial-gradient(
         circle at 84% 80%,
         transparent 0 24vmin,
-        rgba(223, 232, 242, 0.4) 24vmin 31vmin,
+        rgba(228, 214, 195, 0.4) 24vmin 31vmin,
         transparent 31.5vmin
       ),
-      linear-gradient(180deg, #fbfcfe 0%, #f2f6fa 52%, #e8eef4 100%);
+      linear-gradient(180deg, #f9f6f1 0%, #efe6db 52%, #e2d5c6 100%);
   }
 }
 
@@ -469,14 +469,14 @@ body::after {
 
 /* カード */
 .card {
-  background: rgba(249, 252, 255, 0.92);
+  background: rgba(252, 248, 242, 0.92);
   backdrop-filter: blur(10px);
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.3);
   margin-bottom: 20px;
-  color: #4f5866;
+  color: #5e5348;
 }
 .card p,
 .card strong,
@@ -486,10 +486,10 @@ body::after {
 
 /* ホーム内カード（可読性重視で暗めに） */
 #home .card {
-  background: linear-gradient(180deg, rgba(246, 250, 254, 0.96), rgba(234, 241, 248, 0.94)) !important;
-  border: 1px solid rgba(177, 194, 214, 0.3) !important;
-  box-shadow: 0 10px 30px rgba(83, 101, 124, 0.14) !important;
-  color: #4f5866 !important;
+  background: linear-gradient(180deg, rgba(244, 237, 228, 0.96), rgba(232, 221, 207, 0.94)) !important;
+  border: 1px solid rgba(196, 174, 148, 0.3) !important;
+  box-shadow: 0 10px 30px rgba(109, 92, 71, 0.14) !important;
+  color: #5e5348 !important;
   margin-top: -12px !important;
   position: relative;
   z-index: 8;
@@ -500,11 +500,11 @@ body::after {
 #home .notice-meta,
 #home .notice-text,
 #home .notice-empty {
-  color: #4f5866 !important;
+  color: #5e5348 !important;
 }
 #home .notice-item {
-  background: rgba(255, 255, 255, 0.52) !important;
-  border: 1px solid rgba(193, 207, 224, 0.28) !important;
+  background: rgba(255, 255, 255, 0.42) !important;
+  border: 1px solid rgba(209, 188, 163, 0.28) !important;
 }
 
 /* サブUI */
@@ -526,7 +526,7 @@ body::after {
 
 .section-title {
   margin: 22px 0 10px;
-  color: #5b687a;
+  color: #6a5946;
   font-size: 1.2rem;
   font-weight: 900;
   letter-spacing: 0.03em;
@@ -534,11 +534,11 @@ body::after {
 
 .link-card {
   width: 100%;
-  border: 1px solid rgba(176, 194, 216, 0.26);
+  border: 1px solid rgba(194, 171, 142, 0.26);
   border-radius: 22px;
   padding: 18px;
-  background: linear-gradient(180deg, rgba(251, 253, 255, 0.96), rgba(240, 246, 252, 0.94));
-  box-shadow: 0 14px 28px rgba(86, 104, 127, 0.1);
+  background: linear-gradient(180deg, rgba(252, 248, 242, 0.96), rgba(242, 234, 224, 0.94));
+  box-shadow: 0 14px 28px rgba(113, 96, 73, 0.1);
   box-sizing: border-box;
   text-align: left;
   cursor: pointer;
@@ -555,11 +555,11 @@ body::after {
   width: 48px;
   height: 48px;
   border-radius: 16px;
-  background: linear-gradient(180deg, #a8b7c9, #8d9eb4);
+  background: linear-gradient(180deg, #bca48a, #9f8465);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 18px rgba(84, 101, 126, 0.2);
+  box-shadow: 0 10px 18px rgba(124, 101, 75, 0.2);
 }
 
 .icon-svg {
@@ -578,14 +578,14 @@ body::after {
 }
 
 .link-name {
-  color: #4f5b6c;
+  color: #5f4f3e;
   font-size: 1rem;
   font-weight: 900;
 }
 
 .link-desc {
   margin-top: 6px;
-  color: rgba(79, 91, 108, 0.84);
+  color: rgba(95, 79, 57, 0.84);
   line-height: 1.7;
   font-size: 0.92rem;
 }
@@ -1423,13 +1423,16 @@ font-size: 0.8rem;
   <div class="card">
     <p class="detail-copy">イベントは２部制！
 第１部では、代表の信仰体験を新たな形で紹介する会合を開催。
-続く、第２部では、ブース企画を行い、展示や参加者どうしの対話など、信仰の素晴らしさを「見て、聞いて、話せる」内容になっています。
+続く、第２部では、ブース企画の展示や参加者どうしの対話など、信仰の素晴らしさを「見て、聞いて、話せる」内容になっています。
 他にもスマホ撮影が学べるコーナーやお子さんが遊べる「ワクワクランド」も用意しています。
 
-目玉企画は「わたしの功徳展」です。今月末にユース世代に写真応募フォームで投稿された「自分なりの功徳」のエピソードと写真、動画などを展示します。
+目玉企画は「わたしの功徳展」です。応募フォームで投稿された「功徳」のエピソードと写真、動画などを展示します。
 信仰の力を若者目線で伝える広布拡大企画です。
 葛飾中に功徳が広がっている様子をお伝えしていく思いも込めています。</p>
     <div class="detail-callout">参加対象は、男子部、学生部、ハピネス、池田華陽会に加え、中・高等部員！</div>
+  </div>
+  <div class="believe-back-wrap">
+    <button type="button" class="oumi-btn confirm-back-link" onclick="openTab(event, 'home')">ホームへ戻る</button>
   </div>
 </div>
 
