@@ -294,18 +294,33 @@ body::after {
   pointer-events: none;
   user-select: none;
   white-space: nowrap;
-  color: rgba(107, 79, 15, 0.30);
-  font-family: "HGS創英角ﾎﾟｯﾌﾟ体", "HGSoeiKakupoptai", "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", "Meiryo", sans-serif;
+  color: rgba(107, 79, 15, 0.34);
+  font-family: "MS Gothic", "ＭＳ ゴシック", "HGS創英角ﾎﾟｯﾌﾟ体", "HGSoeiKakupoptai", "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", "Meiryo", sans-serif;
   font-size: clamp(3rem, 8vw, 5.6rem);
   font-weight: 700;
-  letter-spacing: 0.06em;
-  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.3);
 }
 
 .mine-card-wrap {
   position: relative;
   z-index: 1;
   margin-top: clamp(70px, 12vw, 120px);
+}
+
+@media (max-width: 768px) {
+  .mine-title-bg {
+    left: 0;
+    width: 100%;
+    transform: none;
+    text-align: center;
+    font-size: clamp(2.4rem, 11vw, 4rem);
+    letter-spacing: 0.03em;
+  }
+
+  .mine-card-wrap {
+    margin-top: clamp(54px, 12vw, 84px);
+  }
 }
 
 /* ヒーロー背景（画像ベース） */
@@ -974,6 +989,15 @@ body::after {
   font-weight: 700;
 }
 
+.home-project-link {
+  display: inline-block;
+  margin: 10px auto 0;
+  color: #fff7b8;
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 .action-link-stack .oumi-btn {
   min-height: 64px;
   font-size: 1.05rem;
@@ -1202,6 +1226,7 @@ font-size: 0.8rem;
       <div class="card" style="margin-top: -12px; text-align: center;">
         <span style="font-size: 0.92rem; color: rgba(255,255,255,0.78); font-weight: 900; letter-spacing: 0.03em;">ユースイベント「ビバ！葛飾！」まで</span>
         <div id="timer" style="font-size: clamp(2.2rem, 5vw, 3rem); font-weight: 900; color: var(--white); line-height: 1.05; text-shadow: 0 2px 10px rgba(113, 82, 16, 0.22);">計算中...</div>
+        <a class="home-project-link" href="./believe-project.html">Believe inプロジェクトについて✔</a>
       </div>
 
       <div class="card notice-board">
@@ -1366,7 +1391,7 @@ const fixedNotices = [
   },
   {
     author: "運営",
-    text: "第2回「ビバ活」\n日時：10月12日（月祝）11時～\n場所：葛飾文化会館",
+    text: "第2回「ビバ活」\n日時：10月12日（月祝）11時～\n場所：葛飾文化会館（亀有・立石・戸田）\n柴又平和会館（高砂・水元）",
     createdAt: new Date("2026-10-12T09:00:00+09:00").getTime(),
   },
   {
